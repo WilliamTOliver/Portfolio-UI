@@ -1,0 +1,6 @@
+# Ignore Packages
+/node_modules
+/bower_components
+
+# Ignore Mac System Files
+.DS_Store

@@ -1,0 +1,30 @@
+{
+  "name": "wto-portfolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "browser-sync": "^2.23.3"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.23.3"
+  },
+  "scripts": {
+    "dev": "polymer serve & npm run watch",
+    "test": "polymer test",
+    "watch": "browser-sync start --proxy localhost:8081 --files 'src/**/*.html, src/**/*.js, images/*' "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WilliamTOliver/wto-portfolio.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WilliamTOliver/wto-portfolio/issues"
+  },
+  "homepage": "https://github.com/WilliamTOliver/wto-portfolio#readme"
+}
