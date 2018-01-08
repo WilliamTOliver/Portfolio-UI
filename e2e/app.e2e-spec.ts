@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('wto-portfolio App', () => {
+describe('predictive-jukebox App', () => {
   let page: AppPage;
 
   beforeEach(() => {
