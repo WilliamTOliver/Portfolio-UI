@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ItemComponent } from './dashboard/item/item.component';
@@ -14,12 +13,12 @@ import { ChartService } from './chart/chart.service';
     DashboardComponent,
     ItemComponent,
     ContainerComponent,
-    ChartComponent
+    ChartComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
   ],
-  providers: [ChartService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
