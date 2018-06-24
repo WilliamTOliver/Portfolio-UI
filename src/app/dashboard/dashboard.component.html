@@ -1,1 +1,1 @@
-<app-dashboard-container></app-dashboard-container>
+<app-chart *ngIf="loaded" *ngFor="let chart of chartSummaries" chart="chart"></app-chart>
