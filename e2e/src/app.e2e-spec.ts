@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('predictive-jukebox App', () => {
+describe('workspace-project App', () => {
   let page: AppPage;
 
   beforeEach(() => {
