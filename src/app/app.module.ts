@@ -4,6 +4,8 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChartComponent } from './chart/chart.component';
 import { ChartService } from './chart/chart.service';
+import { NgxEchartsModule } from 'ngx-echarts';
+
 
 @NgModule({
   declarations: [
@@ -13,8 +15,9 @@ import { ChartService } from './chart/chart.service';
   ],
   imports: [
     BrowserModule,
+    NgxEchartsModule
   ],
-  providers: [],
+  providers: [ChartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

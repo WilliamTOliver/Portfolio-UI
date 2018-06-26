@@ -6,11 +6,15 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./chart.component.scss']
 })
 export class ChartComponent implements OnInit {
+  loadedChart: any;
   @Input() chart: any;
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
+    console.log('this.chart');
+    console.log(this.chart);
+    this.loadedChart = this.chart;
+    console.log('this.loadedChart')
+    console.log(this.loadedChart)
   }
-
 }

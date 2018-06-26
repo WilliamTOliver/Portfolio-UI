@@ -1,1 +1,3 @@
-<app-chart *ngIf="loaded" *ngFor="let chart of chartSummaries" chart="chart"></app-chart>
+<div *ngIf="loaded">
+    <app-chart *ngFor="let chart of charts" [chart]="getChartObject(chart)"></app-chart>
+</div>

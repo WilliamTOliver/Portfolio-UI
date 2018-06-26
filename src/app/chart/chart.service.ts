@@ -7,7 +7,7 @@ import { HttpService } from '../http/http.service';
 export class ChartService {
   private http = HttpService;
   constructor() { }
-  getChartSummaries(charts: any[]) {
-    return this.http.post('chart', {charts});
+  getCharts() {
+    return this.http.get('chart/build');
   }
 }
