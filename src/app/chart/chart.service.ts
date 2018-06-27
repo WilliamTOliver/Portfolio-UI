@@ -8,6 +8,6 @@ export class ChartService {
   private http = HttpService;
   constructor() { }
   getCharts() {
-    return this.http.get('chart/build');
+    return this.http.get('chart/');
   }
 }

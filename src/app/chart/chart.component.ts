@@ -11,10 +11,6 @@ export class ChartComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log('this.chart');
-    console.log(this.chart);
     this.loadedChart = this.chart;
-    console.log('this.loadedChart')
-    console.log(this.loadedChart)
   }
 }
