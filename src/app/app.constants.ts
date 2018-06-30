@@ -1,6 +1,6 @@
 export const appConstants = {
     apiUrls: {
-        config: 'config',
+        config: '/config',
         charts: '/charts',
         chart: '/chart',
     }

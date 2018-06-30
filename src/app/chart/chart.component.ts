@@ -1,3 +1,4 @@
+import { ConfigService } from './../config/config.service';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -7,10 +8,14 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ChartComponent implements OnInit {
   loadedChart: any;
-  @Input() chart: any;
-  constructor() {}
+  chartType: string;
+  i18n: any;
+  @Input() chartData: {type: string, chart: any};
+  constructor(private config: ConfigService) {}
 
   ngOnInit() {
-    this.loadedChart = this.chart;
+    this.chartType = this.chartData.type;
+    this.i18n = this.config.i18n.charts[this.chartType];
+    this.loadedChart = this.chartData.chart;
   }
 }
