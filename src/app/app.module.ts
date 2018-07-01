@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChartComponent } from './chart/chart.component';
 import { ChartService } from './chart/chart.service';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { ConfigService } from './config/config.service';
 
 
 @NgModule({
@@ -17,7 +18,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
     BrowserModule,
     NgxEchartsModule
   ],
-  providers: [ChartService],
+  providers: [ChartService, ConfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

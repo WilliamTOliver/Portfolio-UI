@@ -8,26 +8,27 @@ import { HttpService } from '../http/http.service';
 export class ConfigService {
   private data: {currentLocale: any, i18n: any};
   private http = HttpService;
-  constructor() {}
-
-  public get configData() {
-    if (!this.data) {
-      return this.getConfig().then((response: any) => {
+  constructor() {
+    const config = localStorage.getItem('config');
+    if (config == null) {
+      this.getConfig().then((response: any) => {
+        localStorage.setItem('config', JSON.stringify(response.data));
         this.data = response.data;
-      }).catch(console.log);
+      });
+    } else {
+      console.log(localStorage.getItem('config'))
+      this.data = JSON.parse(localStorage.getItem('config'));
     }
-    return this.data;
-
   }
 
-  public get i18n() {
+  public geti18n() {
     if (!this.data) {
       return this.getConfig().then((response: any) => {
-        this.data = response.data;
+        return response.i18n[response.currentLocale];
       }).catch(console.log);
+    } else {
+      return this.data.i18n[this.data.currentLocale];
     }
-    return this.data.i18n[this.data.currentLocale];
-
   }
   private getConfig(): Promise<any> {
     return this.http.get(appConstants.apiUrls.config);
