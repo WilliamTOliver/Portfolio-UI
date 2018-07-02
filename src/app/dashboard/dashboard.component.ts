@@ -20,10 +20,6 @@ export class DashboardComponent implements OnInit {
   private async getChartSummaries() {
     const response = await this.chartService.getCharts();
     this.chartData = response.data;
-    this.charts = Object.keys(this.chartData);
     this.loaded = true;
-  }
-  public getChartObject(chart: string) {
-    return this.chartData[chart];
   }
 }

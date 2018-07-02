@@ -16,7 +16,6 @@ export class ConfigService {
         this.data = response.data;
       });
     } else {
-      console.log(localStorage.getItem('config'))
       this.data = JSON.parse(localStorage.getItem('config'));
     }
   }

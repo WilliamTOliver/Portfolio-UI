@@ -5,17 +5,10 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./chart.component.scss']
 })
 export class ChartComponent implements OnInit {
-  chart: any;
-  chartType: string;
-  i18n: any;
-  loaded: boolean;
-  @Input() chartData: {type: string, chart: any};
-  constructor(private config: ConfigService) {
-    this.getConfig();
-  }
 
+  @Input() chartData: any;
+  constructor() {
+  }
   ngOnInit() {
-    this.chartType = this.chartData.type;
-    this.chart = this.chartData.chart;
   }
 }
