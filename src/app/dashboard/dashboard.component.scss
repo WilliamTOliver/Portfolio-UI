@@ -1,7 +1,14 @@
-.charts-accordion {
-  width: 15rem;
+.container {
+  margin-left: 5%;
+  max-width: 90%;
 }
-.dashboard-container {
-  margin-left: 10%;
-  max-width: 80%;
+.heading {
+  margin-left: 1rem;
+}
+.charts-acordion {
+  width: 100%;
+  display: block;
+}
+mat-panel-title {
+  flex-grow: 0;
 }

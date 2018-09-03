@@ -1,27 +1,48 @@
-
-<div class="dashboard-container">
+<div>
   <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <span>Third Line</span>
-      <span class="example-spacer"></span>
-      <mat-icon class="example-icon">favorite</mat-icon>
-      <mat-icon class="example-icon">delete</mat-icon>
+      <h1 class="heading">{{toolbarCopy.heading}}</h1>
     </mat-toolbar-row>
   </mat-toolbar>
-  <div class="charts-accordion">
-    <mat-accordion class="example-headers-align">
-      <mat-expansion-panel *ngFor="let chart of chartData; let i = index " [expanded]="step === i" (opened)="setStep(i)" hideToggle>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{chart.chart.title.text}}
-          </mat-panel-title>
-          <mat-panel-description>
-            <mat-icon>{{icons[i]}}</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <div *ngIf="loaded">
+  <div class="container">
+    <mat-accordion class="projects-accordion">
+      <mat-expansion-panel>
+          <mat-expansion-panel-header>
+              <mat-panel-title>
+                <strong>
+                  Charts: 
+                </strong>
+              </mat-panel-title>
+              <mat-panel-description>
+                Integrating an Econ Minor into Programming for the Web
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+        <mat-accordion class="charts-acordion">
+          <mat-expansion-panel *ngFor="let chart of chartData; let i = index " [expanded]="step === i" (opened)="setStep(i)"
+            hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{chart.chart.title.text}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngIf="loaded">
               <app-chart [chartData]="chart"></app-chart>
-          </div>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+          <mat-expansion-panel-header>
+              <mat-panel-title>
+                <strong>
+                  Arts: 
+                </strong>
+              </mat-panel-title>
+              <mat-panel-description>
+                Developing a Passion for Coding by connecting with a life in the Arts
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <!-- todo: huh? -->
       </mat-expansion-panel>
     </mat-accordion>
   </div>

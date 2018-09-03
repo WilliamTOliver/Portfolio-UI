@@ -11,6 +11,9 @@ export class DashboardComponent implements OnInit {
   chartData: any;
   loaded = false;
   icons: any[] = ['scatter_plot', 'expand_less', 'show_chart', 'show_chart'];
+  toolbarCopy: any = {
+    heading: 'William T Oliver'
+  };
   constructor(private chartService: ChartService ) {
     this.getChartSummaries();
   }
