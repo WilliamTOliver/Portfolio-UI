@@ -46,7 +46,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChartComponent } from './chart/chart.component';
 import { ChartService } from './chart/chart.service';
 import { NgxEchartsModule } from 'ngx-echarts';
-import { ConfigService } from './config/config.service';
 
 
 @NgModule({
@@ -95,7 +94,7 @@ import { ConfigService } from './config/config.service';
     MatTooltipModule,
     MatTreeModule,
   ],
-  providers: [ChartService, ConfigService],
+  providers: [ChartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,16 +1,28 @@
 
-<mat-accordion class="example-headers-align">
-    <mat-expansion-panel *ngFor="let chart of chartData; let i = index " [expanded]="step === i" (opened)="setStep(i)" hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          {{chart.chart.title.text}}
-        </mat-panel-title>
-        <mat-panel-description>
-          <mat-icon>{{icons[i]}}</mat-icon>
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <div *ngIf="loaded">
-            <app-chart [chartData]="chart"></app-chart>
-        </div>
-    </mat-expansion-panel>
-  </mat-accordion>
+<div class="dashboard-container">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Third Line</span>
+      <span class="example-spacer"></span>
+      <mat-icon class="example-icon">favorite</mat-icon>
+      <mat-icon class="example-icon">delete</mat-icon>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="charts-accordion">
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel *ngFor="let chart of chartData; let i = index " [expanded]="step === i" (opened)="setStep(i)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{chart.chart.title.text}}
+          </mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>{{icons[i]}}</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngIf="loaded">
+              <app-chart [chartData]="chart"></app-chart>
+          </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

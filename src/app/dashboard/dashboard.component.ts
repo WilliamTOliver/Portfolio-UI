@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfigService } from '../config/config.service';
 import { ChartService } from '../chart/chart.service';
-import { AxiosResponse } from 'axios';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +11,7 @@ export class DashboardComponent implements OnInit {
   chartData: any;
   loaded = false;
   icons: any[] = ['scatter_plot', 'expand_less', 'show_chart', 'show_chart'];
-  constructor(private configService: ConfigService, private chartService: ChartService ) {
+  constructor(private chartService: ChartService ) {
     this.getChartSummaries();
   }
   ngOnInit() {
@@ -30,7 +28,6 @@ export class DashboardComponent implements OnInit {
     };
     const response = await this.chartService.getCharts();
     this.chartData = response.data.sort(comapre);
-    console.log(this.chartData)
     this.loaded = true;
   }
 }
