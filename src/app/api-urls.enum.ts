@@ -1,4 +1,4 @@
 export enum APIURLS {
-  login = '/login',
-  signup = '/signup',
+  login = '/auth/login/',
+  signup = '/auth/signup/',
 }
