@@ -1,5 +1,6 @@
 import { AuthService } from './../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
   token;
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
     this.token = this.authService.token;
   }
   ngOnInit() {
+  }
+  navigate(page) {
+    this.router.navigate([page]);
   }
 }

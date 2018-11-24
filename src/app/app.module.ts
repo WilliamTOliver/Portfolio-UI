@@ -50,7 +50,6 @@ import { ChartService } from './chart/chart.service';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { ChartsAccordionComponent } from './charts-accordion/charts-accordion.component';
 import { LoginComponent } from './login/login.component';
-import { PlaylistViewerComponent } from './playlist-viewer/playlist-viewer.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -67,7 +66,6 @@ const appRoutes: Routes = [
     ChartComponent,
     ChartsAccordionComponent,
     LoginComponent,
-    PlaylistViewerComponent,
     HeaderComponent,
     FooterComponent,
   ],

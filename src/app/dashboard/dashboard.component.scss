@@ -1,0 +1,44 @@
+.dashboard {
+  margin-top: 3rem;
+  width: 100%;
+}
+.reports {
+  background-image: url('./../../assets/chart.png');
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: 7rem;
+  // filter: invert(100%);
+}
+.users {
+  background-image: url('./../../assets/users.png');
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: 10rem;
+  // filter: invert(100%);
+}
+.settings {
+  background-image: url('./../../assets/settings.png');
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: 6rem;
+  // filter: invert(100%);
+}
+.import-playlist {
+  background-image: url('./../../assets/import.png');
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: 5rem;
+  // filter: invert(100%);
+}
+.new-playlist {
+  background-image: url('./../../assets/create-playlist.png');
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: 8rem;
+  // filter: invert(100%);
+}
+button {
+  width: 100%;
+  margin: 1rem;
+  text-align: left;
+  p {
+    padding: 1rem;
+    font-size: 2rem;
+    display: inline-block;
+  }
+}

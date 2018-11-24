@@ -1,14 +1,10 @@
 .container {
   padding: 0 2rem;
 }
-mat-panel-title {
-  flex-grow: 0;
-}
 app-header {
   top: 0;
 }
 app-footer {
   bottom: .5rem;
-  position: fixed;
   width: 100%;
 }
