@@ -46,6 +46,12 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChartComponent } from './chart/chart.component';
 import { ChartService } from './chart/chart.service';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { ChartsAccordionComponent } from './charts-accordion/charts-accordion.component';
+import { LoginComponent } from './login/login.component';
+import { PlaylistViewerComponent } from './playlist-viewer/playlist-viewer.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -53,10 +59,17 @@ import { NgxEchartsModule } from 'ngx-echarts';
     AppComponent,
     DashboardComponent,
     ChartComponent,
+    ChartsAccordionComponent,
+    LoginComponent,
+    PlaylistViewerComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     NgxEchartsModule,
     MatAutocompleteModule,
     MatBadgeModule,

@@ -1,0 +1,5 @@
+export enum APP_CONTEXTS {
+  REORGANIZER = 'REORGANIZER',
+  ABOUT = 'ABOUT',
+  CONTACT = 'CONTACT',
+}
