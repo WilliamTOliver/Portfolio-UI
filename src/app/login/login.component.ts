@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
 import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   passwordFormControl = new FormControl('', [Validators.required]);
   matcher = new MyErrorStateMatcher();
-  constructor(private authService: AuthService) {}
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {}
   async submitLogin(event) {
@@ -31,6 +33,7 @@ export class LoginComponent implements OnInit {
         password: this.passwordFormControl.value
       });
       this.authService.token = auth.token;
+      this.router.navigate(['/dashboard']);
     } catch (error) {
       console.log('​LoginComponent -> }catch -> error', error);
     }

@@ -2,8 +2,10 @@
   flex: 1 1 auto;
 }
 p {
+  font-size: .5rem;
   color: white;
 }
 mat-toolbar {
   background-color: #4a84dc;
+  max-height: 1rem;
 }

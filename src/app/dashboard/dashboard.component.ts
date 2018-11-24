@@ -1,3 +1,4 @@
+import { AuthService } from './../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,13 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  get loggedIn(): boolean {
-    return Boolean(sessionStorage.getItem('loggedIn'));
+  token;
+  constructor(private authService: AuthService) {
+    this.token = this.authService.token;
   }
-  get proceedAsGuest(): boolean {
-    return Boolean(sessionStorage.getItem('proceedAsGuest'));
-  }
-  constructor() {}
   ngOnInit() {
   }
 }

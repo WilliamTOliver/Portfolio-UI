@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
 import { AppComponent } from './app.component';
 // MATERIAL
 import {
@@ -53,6 +55,10 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+const appRoutes: Routes = [
+  { path: 'dashboard',      component: DashboardComponent },
+  { path: '', component: LoginComponent }
+];
 
 @NgModule({
   declarations: [
@@ -70,6 +76,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    ),
     NgxEchartsModule,
     MatAutocompleteModule,
     MatBadgeModule,
