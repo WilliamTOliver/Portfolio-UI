@@ -58,16 +58,18 @@ import { ImportPlaylistComponent } from './import-playlist/import-playlist.compo
 import { SettingsComponent } from './settings/settings.component';
 import { UsersComponent } from './users/users.component';
 import { ReportsComponent } from './reports/reports.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const appRoutes: Routes = [
-  { path: 'dashboard',      component: DashboardComponent },
-  { path: 'reports',      component: ReportsComponent },
-  { path: 'users',      component: UsersComponent },
-  { path: 'settings',      component: SettingsComponent },
-  { path: 'import-playlist',      component: ImportPlaylistComponent },
-  { path: 'create-playlist',      component: CreatePlaylistComponent },
-  { path: '', component: LoginComponent },
-  { path: '**', component: LoginComponent }
+  { path: 'dashboard',      component: DashboardComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard], children: [
+    { path: 'reports',      component: ReportsComponent },
+    { path: 'users',      component: UsersComponent },
+    { path: 'settings',      component: SettingsComponent },
+    { path: 'import-playlist',      component: ImportPlaylistComponent },
+    { path: 'create-playlist',      component: CreatePlaylistComponent },
+  ] },
+  { path: 'login', component: LoginComponent },
+  { path: '**', redirectTo: 'login' }
 ];
 
 @NgModule({
@@ -92,7 +94,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      { enableTracing: false } // <-- debugging purposes only
     ),
     NgxEchartsModule,
     MatAutocompleteModule,

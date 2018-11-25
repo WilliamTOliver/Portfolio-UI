@@ -26,16 +26,15 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
   async submitLogin(event) {
-    console.log('​LoginComponent -> submitLogin -> event', event);
     try {
       const auth: any = await this.authService.login({
         email: this.emailFormControl.value,
         password: this.passwordFormControl.value
       });
-      this.authService.token = auth.token;
+      sessionStorage.setItem('authorization', auth.data.token);
       this.router.navigate(['/dashboard']);
     } catch (error) {
-      console.log('​LoginComponent -> }catch -> error', error);
+      console.log('authService.login -> catch -> error', error);
     }
   }
 }

@@ -11,4 +11,7 @@ export class AuthService {
   login(credentials) {
     return HttpService.post(APIURLS.login, credentials);
   }
+  checkAuth() {
+    return HttpService.get(APIURLS.checkAuth);
+  }
 }
