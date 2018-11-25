@@ -61,7 +61,8 @@ import { ReportsComponent } from './reports/reports.component';
 import { AuthGuard } from './auth/auth.guard';
 
 const appRoutes: Routes = [
-  { path: 'dashboard',      component: DashboardComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard], children: [
+  { path: 'dashboard', canActivate: [AuthGuard], canActivateChild: [AuthGuard], children: [
+    { path: '',      component: DashboardComponent },
     { path: 'reports',      component: ReportsComponent },
     { path: 'users',      component: UsersComponent },
     { path: 'settings',      component: SettingsComponent },
