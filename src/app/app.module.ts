@@ -53,10 +53,21 @@ import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreatePlaylistComponent } from './create-playlist/create-playlist.component';
+import { ImportPlaylistComponent } from './import-playlist/import-playlist.component';
+import { SettingsComponent } from './settings/settings.component';
+import { UsersComponent } from './users/users.component';
+import { ReportsComponent } from './reports/reports.component';
 
 const appRoutes: Routes = [
   { path: 'dashboard',      component: DashboardComponent },
-  { path: '', component: LoginComponent }
+  { path: 'reports',      component: ReportsComponent },
+  { path: 'users',      component: UsersComponent },
+  { path: 'settings',      component: SettingsComponent },
+  { path: 'import-playlist',      component: ImportPlaylistComponent },
+  { path: 'create-playlist',      component: CreatePlaylistComponent },
+  { path: '', component: LoginComponent },
+  { path: '**', component: LoginComponent }
 ];
 
 @NgModule({
@@ -68,6 +79,11 @@ const appRoutes: Routes = [
     LoginComponent,
     HeaderComponent,
     FooterComponent,
+    CreatePlaylistComponent,
+    ImportPlaylistComponent,
+    SettingsComponent,
+    UsersComponent,
+    ReportsComponent,
   ],
   imports: [
     BrowserModule,
