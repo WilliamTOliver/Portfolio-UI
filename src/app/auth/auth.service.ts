@@ -6,12 +6,16 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  token;
+  get authorizedHeaders(): any {
+    return {
+      headers: { authorization: 'Bearer: ' + sessionStorage.getItem('authorization') }
+    };
+  }
   constructor() {}
   login(credentials) {
     return HttpService.post(APIURLS.login, credentials);
   }
   checkAuth() {
-    return HttpService.get(APIURLS.checkAuth);
+    return HttpService.get(APIURLS.checkAuth, this.authorizedHeaders);
   }
 }
