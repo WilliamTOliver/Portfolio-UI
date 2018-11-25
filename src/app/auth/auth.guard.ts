@@ -7,26 +7,22 @@ import { AuthService } from './auth.service';
 })
 export class AuthGuard implements CanActivateChild, CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> | boolean {
+  checkAuth(): Promise<boolean> {
     return this.authService
       .checkAuth()
       .then((auth) => {
         return true;
       })
       .catch((err) => {
+        sessionStorage.clear();
         this.router.navigate(['login']);
         return false;
       });
   }
+  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> | boolean {
+    return this.checkAuth();
+  }
   canActivateChild(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> | boolean {
-    return this.authService
-      .checkAuth()
-      .then((auth) => {
-        return true;
-      })
-      .catch((err) => {
-        this.router.navigate(['login']);
-        return false;
-      });
+    return this.checkAuth();
   }
 }
