@@ -8,13 +8,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  token;
   constructor(private authService: AuthService, private router: Router) {
-    this.token = this.authService.token;
   }
   ngOnInit() {
   }
   navigate(page) {
-    this.router.navigate([page]);
+    this.router.navigate([`dashboard/${page}`]);
   }
 }
