@@ -1,5 +1,5 @@
 import { APIURLS } from './../api-urls.enum';
-import { HttpService } from './../http/http.service';
+import { API } from './../http/http.service';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -8,14 +8,17 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   get authorizedHeaders(): any {
     return {
-      headers: { authorization: 'Bearer: ' + sessionStorage.getItem('authorization') }
+      headers: { authorization: 'Bearer: ' + this.token }
     };
+  }
+  get token(): string {
+    return sessionStorage.getItem('authorization');
   }
   constructor() {}
   login(credentials) {
-    return HttpService.post(APIURLS.login, credentials);
+    return API.post(APIURLS.login, credentials);
   }
   checkAuth() {
-    return HttpService.get(APIURLS.checkAuth, this.authorizedHeaders);
+    return API.get(APIURLS.checkAuth, this.authorizedHeaders);
   }
 }
