@@ -1,6 +1,6 @@
 <div class="dashboard">
   <h1> Playlist Manager </h1>
-  <div class="row">
+  <div class="row" *ngIf="spotifyAuthorized">
     <div class="col-xs-10 col-sm-6">
       <a (click)="navigate('reports')">
         <button
@@ -45,5 +45,8 @@
         </button>
       </a>
     </div>
+  </div>
+  <div *ngIf="!spotifyAuthorized">
+    <button mat-raised-button (click)="spotifyLogin()"> Log In </button>
   </div>
 </div>
