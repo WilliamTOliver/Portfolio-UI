@@ -4,7 +4,8 @@
 app-header {
   top: 0;
 }
-app-footer {
+app-footer:not .mr-footer{
+  position: absolute;
   bottom: .5rem;
   width: 100%;
 }
