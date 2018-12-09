@@ -1,3 +1,5 @@
+import { APIURLS } from './../api-urls.enum';
+import { API } from './../http/http.service';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
@@ -30,16 +32,6 @@ export class SpotifyService {
     window.location.href = this.authorizationRedirect;
   }
   requestToken(code) {
-    const headers = {
-      headers: {
-        Authorization: `Basic ${btoa(`${environment.spotifyClientId}:${environment.spotifyClientSecret}`)}`
-      }
-    };
-    const body = {
-      grant_type: 'authorization_code',
-      redirect_uri: this.redirectUrl,
-      code
-    };
-    return httpService.post('https://accounts.spotify.com/api/token', body, headers);
+    return API.post(APIURLS.spotifyToken, {code, redirect_uri: this.redirectUrl}, this.authService.authorizedHeaders);
   }
 }
