@@ -1,3 +1,5 @@
+import { APIURLS } from './../api-urls.enum';
+import { API } from './../http/http.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource } from '@angular/material';
 
@@ -13,6 +15,7 @@ export class ImportPlaylistComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit() {
+    API.get(APIURLS.spotifyPlaylist, {})
     this.dataSource.sort = this.sort;
   }
 
