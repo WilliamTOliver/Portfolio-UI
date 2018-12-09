@@ -32,6 +32,11 @@ export class SpotifyService {
     window.location.href = this.authorizationRedirect;
   }
   requestToken(code) {
-    return API.post(APIURLS.spotifyToken, {code, redirect_uri: this.redirectUrl}, this.authService.authorizedHeaders);
+    const spotifyAuth = sessionStorage.getItem('spotifyAuth');
+    return API.post(
+      APIURLS.spotifyToken,
+      { code, redirect_uri: this.redirectUrl, spotifyAuth: spotifyAuth && JSON.parse(spotifyAuth) },
+      this.authService.authorizedHeaders
+    );
   }
 }

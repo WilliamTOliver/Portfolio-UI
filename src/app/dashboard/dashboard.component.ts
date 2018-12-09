@@ -9,13 +9,19 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  spotifyAuthorized = false;
+  get spotifyAuthorized(): boolean {
+    return Boolean(sessionStorage.getItem('spotifyAuth'));
+  }
   constructor(private route: ActivatedRoute, private router: Router, private spotifyService: SpotifyService) {}
   ngOnInit() {
     const params: any = this.route.queryParams;
     if (params && params.value && params.value.code) {
-      this.spotifyService.requestToken(params.value.code);
+      this.spotifyService.requestToken(params.value.code).then(this.onSpotifyTokenSuccess.bind(this));
     }
+  }
+  onSpotifyTokenSuccess(data) {
+    sessionStorage.setItem('spotifyAuth', JSON.stringify(data));
+    this.router.navigate(['/dashboard']);
   }
   navigate(page) {
     this.router.navigate([`dashboard/${page}`]);

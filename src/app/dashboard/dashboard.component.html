@@ -1,7 +1,7 @@
 <div class="dashboard">
   <h1> Playlist Manager </h1>
   <div class="row" *ngIf="spotifyAuthorized">
-    <div class="col-xs-10 col-sm-6">
+    <div class="col-xs-10 col-sm-6 dashboard-ctas">
       <a (click)="navigate('reports')">
         <button
           mat-raised-button
@@ -27,7 +27,7 @@
         </button>
       </a>
     </div>
-    <div class="col-xs-10 col-sm-6">
+    <div class="col-xs-10 col-sm-6 dashboard-ctas">
       <a (click)="navigate('import-playlist')">
         <button
           mat-raised-button
@@ -47,6 +47,9 @@
     </div>
   </div>
   <div *ngIf="!spotifyAuthorized">
-    <button mat-raised-button (click)="spotifyLogin()"> Log In </button>
+    <p>This application, with your authorization, uses your spotify data to show unique insights about your music preferences. To proceed, please first login with spotify:</p>
+    <button mat-raised-button (click)="spotifyLogin()"> 
+      <img src="./../../assets/Spotify_Logo_RGB_White.png" alt="Login With Spotify">
+    </button>
   </div>
 </div>

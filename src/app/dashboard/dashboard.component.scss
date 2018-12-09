@@ -32,10 +32,19 @@
   background-size: 8rem;
   // filter: invert(100%);
 }
+.dashboard-ctas {
+  button {
+    width: 100%;
+  }
+}
 button {
-  width: 100%;
   margin: 1rem;
   text-align: left;
+  background-color: black;
+  img {
+    max-width: 10rem;
+    padding: 1rem;
+  }
   p {
     padding: 1rem;
     font-size: 2rem;
