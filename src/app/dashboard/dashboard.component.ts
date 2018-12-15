@@ -18,9 +18,10 @@ export class DashboardComponent implements OnInit {
     if (params && params.value && params.value.code) {
       this.spotifyService.requestToken(params.value.code).then(this.onSpotifyTokenSuccess.bind(this));
     }
+    this.spotifyService.getUserInfo().then(userInfo => this.spotifyService.setUser(userInfo.data)).catch(console.log);
   }
-  onSpotifyTokenSuccess(data) {
-    sessionStorage.setItem('spotifyAuth', JSON.stringify(data));
+  onSpotifyTokenSuccess(response) {
+    sessionStorage.setItem('spotifyAuth', JSON.stringify(response.data));
     this.router.navigate(['/dashboard']);
   }
   navigate(page) {

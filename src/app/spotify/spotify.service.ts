@@ -11,7 +11,9 @@ import { httpService } from '../http/http.service';
 export class SpotifyService {
   authorizationRedirect: string;
   redirectUrl = 'http://localhost:4200/dashboard';
-
+  get spotifyAuth() {
+    return JSON.parse(sessionStorage.getItem('spotifyAuth'));
+  }
   constructor(private authService: AuthService) {
     const options = {
       response_type: 'code',
@@ -31,12 +33,24 @@ export class SpotifyService {
   requestAuth() {
     window.location.href = this.authorizationRedirect;
   }
+  setUser(user) {
+    const spotifyAuth = this.spotifyAuth;
+    spotifyAuth.user = user;
+    sessionStorage.setItem('spotifyAuth', JSON.stringify(spotifyAuth));
+  }
+
+  // API REQUESTS
   requestToken(code) {
-    const spotifyAuth = sessionStorage.getItem('spotifyAuth');
     return API.post(
       APIURLS.spotifyToken,
-      { code, redirect_uri: this.redirectUrl, spotifyAuth: spotifyAuth && JSON.parse(spotifyAuth) },
+      { code, redirect_uri: this.redirectUrl, spotifyAuth: this.spotifyAuth },
       this.authService.authorizedHeaders
     );
+  }
+  getUserInfo() {
+    return API.get(APIURLS.spotifyUser.replace(':token', this.spotifyAuth.access_token), this.authService.authorizedHeaders);
+  }
+  getUserPlaylists(): Promise<any> {
+    return API.get(APIURLS.userPlaylists.replace(':token', this.spotifyAuth.access_token),  this.authService.authorizedHeaders);
   }
 }
