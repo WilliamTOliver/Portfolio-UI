@@ -38,6 +38,13 @@ export class SpotifyService {
     spotifyAuth.user = user;
     sessionStorage.setItem('spotifyAuth', JSON.stringify(spotifyAuth));
   }
+  getUserPlaylists(): Promise<any> {
+    return this.fetchUserPlaylists()
+      .then(response => {
+        return response.data.items;
+      })
+      .catch(err => console.log);
+  }
 
   // API REQUESTS
   requestToken(code) {
@@ -50,7 +57,8 @@ export class SpotifyService {
   getUserInfo() {
     return API.get(APIURLS.spotifyUser.replace(':token', this.spotifyAuth.access_token), this.authService.authorizedHeaders);
   }
-  getUserPlaylists(): Promise<any> {
+
+  fetchUserPlaylists() {
     return API.get(APIURLS.userPlaylists.replace(':token', this.spotifyAuth.access_token),  this.authService.authorizedHeaders);
   }
 }

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -40,9 +40,8 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule,
-  MatTreeModule,
+  MatTreeModule
 } from '@angular/material';
-
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChartComponent } from './chart/chart.component';
@@ -53,22 +52,27 @@ import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CreatePlaylistComponent } from './create-playlist/create-playlist.component';
-import { ImportPlaylistComponent } from './import-playlist/import-playlist.component';
+import { TrackTableComponent } from './track-table/track-table.component';
+import { PlaylistTableComponent } from './playlist-table/playlist-table.component';
 import { SettingsComponent } from './settings/settings.component';
 import { UsersComponent } from './users/users.component';
 import { ReportsComponent } from './reports/reports.component';
 import { AuthGuard } from './auth/auth.guard';
 
 const appRoutes: Routes = [
-  { path: 'dashboard', canActivate: [AuthGuard], canActivateChild: [AuthGuard], children: [
-    { path: '',      component: DashboardComponent },
-    { path: 'reports',      component: ReportsComponent },
-    { path: 'users',      component: UsersComponent },
-    { path: 'settings',      component: SettingsComponent },
-    { path: 'import-playlist',      component: ImportPlaylistComponent },
-    { path: 'create-playlist',      component: CreatePlaylistComponent },
-  ] },
+  {
+    path: 'dashboard',
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    children: [
+      { path: '', component: DashboardComponent },
+      { path: 'reports', component: ReportsComponent },
+      { path: 'users', component: UsersComponent },
+      { path: 'settings', component: SettingsComponent },
+      { path: 'playlist-table', component: PlaylistTableComponent },
+      { path: 'track-table', component: TrackTableComponent }
+    ]
+  },
   { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: 'login' }
 ];
@@ -82,11 +86,11 @@ const appRoutes: Routes = [
     LoginComponent,
     HeaderComponent,
     FooterComponent,
-    CreatePlaylistComponent,
-    ImportPlaylistComponent,
+    TrackTableComponent,
+    PlaylistTableComponent,
     SettingsComponent,
     UsersComponent,
-    ReportsComponent,
+    ReportsComponent
   ],
   imports: [
     BrowserModule,
@@ -132,9 +136,9 @@ const appRoutes: Routes = [
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatTreeModule,
+    MatTreeModule
   ],
   providers: [ChartService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

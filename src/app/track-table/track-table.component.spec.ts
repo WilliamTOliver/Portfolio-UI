@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ImportPlaylistComponent } from './import-playlist.component';
+import { TrackTableComponent } from './track-table.component';
 
-describe('ImportPlaylistComponent', () => {
-  let component: ImportPlaylistComponent;
-  let fixture: ComponentFixture<ImportPlaylistComponent>;
+describe('TrackTableComponent', () => {
+  let component: TrackTableComponent;
+  let fixture: ComponentFixture<TrackTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImportPlaylistComponent ]
+      declarations: [ TrackTableComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ImportPlaylistComponent);
+    fixture = TestBed.createComponent(TrackTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
