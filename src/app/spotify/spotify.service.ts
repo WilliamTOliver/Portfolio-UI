@@ -3,7 +3,6 @@ import { API } from './../http/http.service';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth/auth.service';
-import { httpService } from '../http/http.service';
 
 @Injectable({
   providedIn: 'root'
@@ -40,10 +39,18 @@ export class SpotifyService {
   }
   getUserPlaylists(): Promise<any> {
     return this.fetchUserPlaylists()
-      .then(response => {
-        return response.data.items;
+      .then((response) => {
+        const filteredPlaylists = response.data.items.map((playlist) => {
+          return {
+            id: playlist.id,
+            image: playlist.images && playlist.images.length > 0 && playlist.images[0].url,
+            name: playlist.name,
+            tracks: playlist.tracks.total
+          };
+        });
+        return filteredPlaylists;
       })
-      .catch(err => console.log);
+      .catch((err) => console.log);
   }
 
   // API REQUESTS
@@ -55,10 +62,16 @@ export class SpotifyService {
     );
   }
   getUserInfo() {
-    return API.get(APIURLS.spotifyUser.replace(':token', this.spotifyAuth.access_token), this.authService.authorizedHeaders);
+    return API.get(
+      APIURLS.spotifyUser.replace(':token', this.spotifyAuth.access_token),
+      this.authService.authorizedHeaders
+    );
   }
 
   fetchUserPlaylists() {
-    return API.get(APIURLS.userPlaylists.replace(':token', this.spotifyAuth.access_token),  this.authService.authorizedHeaders);
+    return API.get(
+      APIURLS.userPlaylists.replace(':token', this.spotifyAuth.access_token),
+      this.authService.authorizedHeaders
+    );
   }
 }

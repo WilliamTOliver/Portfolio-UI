@@ -53,7 +53,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TrackTableComponent } from './track-table/track-table.component';
-import { PlaylistTableComponent } from './playlist-table/playlist-table.component';
+import { SearchTableComponent } from './search-table/search-table.component';
 import { SettingsComponent } from './settings/settings.component';
 import { UsersComponent } from './users/users.component';
 import { ReportsComponent } from './reports/reports.component';
@@ -69,7 +69,7 @@ const appRoutes: Routes = [
       { path: 'reports', component: ReportsComponent },
       { path: 'users', component: UsersComponent },
       { path: 'settings', component: SettingsComponent },
-      { path: 'playlist-table', component: PlaylistTableComponent },
+      { path: 'search-table', component: SearchTableComponent },
       { path: 'track-table', component: TrackTableComponent }
     ]
   },
@@ -87,7 +87,7 @@ const appRoutes: Routes = [
     HeaderComponent,
     FooterComponent,
     TrackTableComponent,
-    PlaylistTableComponent,
+    SearchTableComponent,
     SettingsComponent,
     UsersComponent,
     ReportsComponent

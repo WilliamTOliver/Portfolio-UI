@@ -20,7 +20,7 @@
   background-size: 6rem;
   // filter: invert(100%);
 }
-.playlist-table {
+.search-table {
   background-image: url('./../../assets/import.png');
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: 5rem;
@@ -42,12 +42,12 @@ button {
   text-align: left;
   background-color: black;
   img {
-    max-width: 10rem;
-    padding: 1rem;
+    max-width: 3rem;
+    padding: .5rem;
   }
   p {
-    padding: 1rem;
-    font-size: 2rem;
+    margin: 0 auto;
+    font-size: 1rem;
     display: inline-block;
   }
 }

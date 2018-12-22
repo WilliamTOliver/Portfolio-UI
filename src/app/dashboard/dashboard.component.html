@@ -1,55 +1,16 @@
 <div class="dashboard">
   <h1> Playlist Manager </h1>
   <div class="row" *ngIf="spotifyAuthorized">
-    <div class="col-10 col-sm-6 dashboard-ctas">
-      <a (click)="navigate('reports')">
-        <button
-          mat-raised-button
-          class="reports"
-        >
-          <p><strong>Reports</strong></p>
-        </button>
-      </a>
-      <a (click)="navigate('users')">
-        <button
-          mat-raised-button
-          class="users"
-        >
-          <p><strong>Users</strong></p>
-        </button>
-      </a>
-      <a (click)="navigate('settings')">
-        <button
-          mat-raised-button
-          class="settings"
-        >
-          <p><strong>Settings</strong></p>
-        </button>
-      </a>
-    </div>
-    <div class="col-10 col-sm-6 dashboard-ctas">
-      <a (click)="navigate('playlist-table')">
-        <button
-          mat-raised-button
-          class="playlist-table"
-        >
-          <p><strong>Import</strong></p>
-        </button>
-      </a>
-      <a (click)="navigate('track-table')">
-        <button
-          mat-raised-button
-          class="track-table"
-        >
-          <p><strong>Generate</strong></p>
-        </button>
-      </a>
-    </div>
+    <app-search-table></app-search-table>
+    <!-- <app-footer class="d-block d-sm-none"></app-footer>
+    <app-footer class="d-none d-sm-block"></app-footer> -->
   </div>
   <div *ngIf="!spotifyAuthorized">
-    <p>This application, with your authorization, uses your spotify data to show unique insights about your music preferences. To proceed, please first login with spotify:</p>
+    <p>This application, with your authorization, uses your spotify data to show unique insights about your music preferences.</p>
+    <p>To proceed, please first login with spotify:</p>
     <button mat-raised-button (click)="spotifyLogin()"> 
-      <img src="./../../assets/Spotify_Logo_RGB_White.png" alt="Login With Spotify">
+      <img src="./../../assets/Spotify_Icon_CMYK_White.png" alt="">
+      <span><p>Login with Spotify</p></span>
     </button>
   </div>
 </div>
