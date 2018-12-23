@@ -1,15 +1,18 @@
 <div class="dashboard">
-  <h1> Playlist Manager </h1>
   <div class="row" *ngIf="spotifyAuthorized">
-    <app-search-table></app-search-table>
+    <app-search-table class="col-4"></app-search-table>
     <!-- <app-footer class="d-block d-sm-none"></app-footer>
     <app-footer class="d-none d-sm-block"></app-footer> -->
   </div>
   <div *ngIf="!spotifyAuthorized">
-    <p>This application, with your authorization, uses your spotify data to show unique insights about your music preferences.</p>
+    <h1>Playlist Manager</h1>
+    <p>
+      This application, with your authorization, uses your spotify data to show
+      unique insights about your music preferences.
+    </p>
     <p>To proceed, please first login with spotify:</p>
-    <button mat-raised-button (click)="spotifyLogin()"> 
-      <img src="./../../assets/Spotify_Icon_CMYK_White.png" alt="">
+    <button mat-raised-button (click)="spotifyLogin()">
+      <img src="./../../assets/Spotify_Icon_CMYK_White.png" alt="" />
       <span><p>Login with Spotify</p></span>
     </button>
   </div>

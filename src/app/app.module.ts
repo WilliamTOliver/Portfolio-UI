@@ -58,6 +58,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { UsersComponent } from './users/users.component';
 import { ReportsComponent } from './reports/reports.component';
 import { AuthGuard } from './auth/auth.guard';
+import { AuthService } from './auth/auth.service';
+import { SpotifyService } from './spotify/spotify.service';
 
 const appRoutes: Routes = [
   {
@@ -138,7 +140,7 @@ const appRoutes: Routes = [
     MatTooltipModule,
     MatTreeModule
   ],
-  providers: [ChartService],
+  providers: [ChartService, AuthService, SpotifyService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

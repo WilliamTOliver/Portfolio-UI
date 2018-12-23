@@ -1,7 +1,6 @@
 import { SpotifyService } from './../spotify/spotify.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,8 +16,9 @@ export class DashboardComponent implements OnInit {
     const params: any = this.route.queryParams;
     if (params && params.value && params.value.code) {
       this.spotifyService.requestToken(params.value.code).then(this.onSpotifyTokenSuccess.bind(this));
+    } else {
+      this.spotifyService.getUserInfo().then(userInfo => this.spotifyService.setUser(userInfo.data)).catch(console.log);
     }
-    this.spotifyService.getUserInfo().then(userInfo => this.spotifyService.setUser(userInfo.data)).catch(console.log);
   }
   onSpotifyTokenSuccess(response) {
     sessionStorage.setItem('spotifyAuth', JSON.stringify(response.data));

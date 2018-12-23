@@ -1,3 +1,31 @@
 .playlist-art {
   max-width: 5rem;
 }
+.search-table-group {
+  width: 100%;
+}
+.tracks-blue {
+  color: #4576b6;
+}
+.tracks-green {
+  color: #45b645;
+}
+.tracks-yellow {
+  color: #b69c45;
+}
+.tracks-orange {
+  color: #b67245;
+}
+.tracks-red {
+  color: #b64545;
+}
+td {
+  font-size: .75rem;
+}
+.selected {
+  background-color: #606060
+}
+
+.hide {
+  display: none;
+}
