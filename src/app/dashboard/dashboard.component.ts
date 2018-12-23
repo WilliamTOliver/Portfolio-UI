@@ -40,12 +40,4 @@ export class DashboardComponent implements OnInit {
   spotifyLogin() {
     this.spotifyService.requestAuth();
   }
-  onSelectedChanged(selected) {
-    console.log(
-      '​DashboardComponent -> onSelectedChanged -> selected',
-      selected
-    );
-    this.selectedPlaylists = [];
-    this.selectedPlaylists = selected;
-  }
 }

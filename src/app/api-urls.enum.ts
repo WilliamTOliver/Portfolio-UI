@@ -5,4 +5,5 @@ export enum APIURLS {
   spotifyToken = 'spotify/token',
   spotifyUser = 'spotify/user/:token',
   userPlaylists = 'spotify/playlist/:token',
+  playlistTracks = 'spotify/playlist/:id/tracks/:token'
 }

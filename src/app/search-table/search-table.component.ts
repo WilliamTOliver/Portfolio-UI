@@ -20,8 +20,6 @@ export class SearchTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   selected: any[] = [];
-  @Output()
-  selectedChanged = new EventEmitter();
   constructor(private spotifyService: SpotifyService) {}
 
   ngOnInit() {
@@ -43,11 +41,10 @@ export class SearchTableComponent implements OnInit {
     row.selected = !row.selected;
     if (row.selected) {
       this.selected.push(row);
-      this.selectedChanged.emit(this.selected);
     } else {
       this.selected = this.selected.filter(item => item.id !== row.id);
-      this.selectedChanged.emit(this.selected);
     }
+    this.spotifyService.selectedPlaylists.next(this.selected);
     sessionStorage.setItem('selectedPlaylists', JSON.stringify(this.selected));
   }
   getTracksClass(tracks) {

@@ -1,7 +1,7 @@
 <div class="dashboard">
   <div class="row" *ngIf="spotifyAuthorized">
-    <app-search-table class="col-4" (selectedChanged)="onSelectedChanged($event)"></app-search-table>
-    <app-track-table [playlists]="selectedPlaylists"></app-track-table>
+    <app-search-table class="col-4"></app-search-table>
+    <app-track-table class="col-8"></app-track-table>
     <!-- <app-footer class="d-block d-sm-none"></app-footer>
     <app-footer class="d-none d-sm-block"></app-footer> -->
   </div>
