@@ -8,16 +8,26 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  selectedPlaylists: any[] = [];
   get spotifyAuthorized(): boolean {
     return Boolean(sessionStorage.getItem('spotifyAuth'));
   }
-  constructor(private route: ActivatedRoute, private router: Router, private spotifyService: SpotifyService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private spotifyService: SpotifyService
+  ) {}
   ngOnInit() {
     const params: any = this.route.queryParams;
     if (params && params.value && params.value.code) {
-      this.spotifyService.requestToken(params.value.code).then(this.onSpotifyTokenSuccess.bind(this));
+      this.spotifyService
+        .requestToken(params.value.code)
+        .then(this.onSpotifyTokenSuccess.bind(this));
     } else {
-      this.spotifyService.getUserInfo().then(userInfo => this.spotifyService.setUser(userInfo.data)).catch(console.log);
+      this.spotifyService
+        .getUserInfo()
+        .then(userInfo => this.spotifyService.setUser(userInfo.data))
+        .catch(console.log);
     }
   }
   onSpotifyTokenSuccess(response) {
@@ -29,5 +39,13 @@ export class DashboardComponent implements OnInit {
   }
   spotifyLogin() {
     this.spotifyService.requestAuth();
+  }
+  onSelectedChanged(selected) {
+    console.log(
+      '​DashboardComponent -> onSelectedChanged -> selected',
+      selected
+    );
+    this.selectedPlaylists = [];
+    this.selectedPlaylists = selected;
   }
 }
