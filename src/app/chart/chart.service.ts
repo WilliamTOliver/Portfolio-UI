@@ -1,4 +1,3 @@
-import { AuthService } from './../auth/auth.service';
 import { Injectable } from '@angular/core';
 import { API } from '../http/http.service';
 
@@ -6,8 +5,8 @@ import { API } from '../http/http.service';
   providedIn: 'root'
 })
 export class ChartService {
-  constructor(private authService: AuthService) { }
+  constructor() { }
   getCharts() {
-    return API.get('chart/', this.authService.authorizedHeaders);
+    return API.get('chart/');
   }
 }

@@ -67,7 +67,6 @@ export class SpotifyService {
         console.log(args);
       });
       this.cachedSelectedPlaylistIds = playlistIds;
-
     }
   }
   public requestAuth() {
@@ -96,30 +95,18 @@ export class SpotifyService {
 
   // API REQUESTS
   public requestToken(code) {
-    return API.post(
-      APIURLS.spotifyToken,
-      { code, redirect_uri: this.redirectUrl, spotifyAuth: this.spotifyAuth },
-      this.authService.authorizedHeaders
-    );
+    return API.post(APIURLS.spotifyToken, { code, redirect_uri: this.redirectUrl, spotifyAuth: this.spotifyAuth });
   }
   public getUserInfo() {
     const storedAuth = sessionStorage.getItem('spotifyAuth');
-    return storedAuth
-      ? Promise.resolve(JSON.parse(storedAuth))
-      : API.get(
-          APIURLS.spotifyUser.replace(':token', this.spotifyAuth.access_token),
-          this.authService.authorizedHeaders
-        );
+    return storedAuth ? Promise.resolve(JSON.parse(storedAuth)) : API.get(APIURLS.spotifyUser);
   }
 
   public fetchUserPlaylists() {
     if (this.currentUserPlaylists) {
       return Promise.resolve(this.currentUserPlaylists);
     } else {
-      return API.get(
-        APIURLS.userPlaylists.replace(':token', this.spotifyAuth.access_token),
-        this.authService.authorizedHeaders
-      ).then((playlists) => {
+      return API.get(APIURLS.userPlaylists).then((playlists) => {
         this.currentUserPlaylists = playlists;
         return playlists;
       });
@@ -128,10 +115,7 @@ export class SpotifyService {
   public fetchPlaylistTracks(id) {
     console.log('​SpotifyService -> fetchPlaylistTracks -> id', id);
     // NOT CACHED ~ cached in onSelectedPlaylistsChange
-    return API.get(
-      APIURLS.playlistTracks.replace(':token', this.spotifyAuth.access_token).replace(':id', id),
-      this.authService.authorizedHeaders
-    ).then((tracks) => {
+    return API.get(APIURLS.playlistTracks.replace(':id', id)).then((tracks) => {
       return tracks;
     });
   }

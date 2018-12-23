@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
       sessionStorage.setItem('authorization', auth.data.token);
       this.router.navigate(['/dashboard']);
     } catch (error) {
-      console.log('authService.login -> catch -> error', JSON.stringify(error, null, 2));
+      console.log('authService.submitLogin -> catch -> error', JSON.stringify(error, null, 2));
     }
   }
 }
