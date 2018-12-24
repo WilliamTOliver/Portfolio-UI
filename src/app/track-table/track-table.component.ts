@@ -11,6 +11,9 @@ export class TrackTableComponent implements OnInit {
   data: any;
   @Input()
   type: string;
+  get hasTracks() {
+    return this.data && this.data.tracks && this.data.tracks.length > 0;
+  }
   // TABLE PROPERTIES
   trackData: MatTableDataSource<any>;
   displayedColumns: string[] = ['name'];
@@ -19,14 +22,9 @@ export class TrackTableComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log(this.data.tracks.map(trackobj => trackobj.track));
-    console.log(this.type);
-    this.trackData = new MatTableDataSource(this.data.tracks.map(trackobj => trackobj.track));
+    this.trackData = new MatTableDataSource(this.data.tracks.map((trackobj) => trackobj.track));
   }
-  select(row) {
-  }
-  getTracksClass(tracks) {
-  }
-  applyFilter(filterValue: string) {
-  }
+  select(row) {}
+  getTracksClass(tracks) {}
+  applyFilter(filterValue: string) {}
 }

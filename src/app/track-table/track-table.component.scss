@@ -1,6 +1,18 @@
 mat-card {
-    background-color: #505050;
+  background-color: #606060;
 }
+
 img {
-    max-width: 4rem;
+  max-width: 6rem;
+}
+
+.hide {
+  display: none;
+}
+
+button {
+  font-size: .75rem;
+}
+.delete {
+    color: red;
 }

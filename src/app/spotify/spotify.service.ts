@@ -58,24 +58,31 @@ export class SpotifyService {
       this.tracks.next(currentTracks);
       this.cachedSelectedPlaylistIds = playlistIds;
     } else {
-      // Positive Diff - need to get tracks
+      // Positive Diff
       const addedPlaylistIds = playlistIds.filter((id) => this.cachedSelectedPlaylistIds.indexOf(id) === -1);
-        const resolved = [];
-        const newTracks = {};
-        addedPlaylistIds.map((id) => {
-          const promise = this.fetchPlaylistTracks(id).then(response => {
+      const oversizedPlaylistIds = playlists
+        .filter((playlist) => playlist.numTracks > 100 && playlist.id)
+        .map((obj) => obj.id);
+      const resolved = [];
+      const newTracks = {};
+      addedPlaylistIds.map((id) => {
+        if (oversizedPlaylistIds.indexOf(id) > -1) {
+          // Playlist too big to fetch all tracks and details in one go, force playlist refactor before proceeding.
+          newTracks[id] = [];
+          resolved.push(Promise.resolve());
+        } else {
+          const promise = this.fetchPlaylistTracks(id).then((response) => {
             newTracks[id] = response.data;
           });
           resolved.push(promise);
-        });
-        if (resolved.length > 0) {
-          Promise.all(resolved).then((tracks) => {
-            const currentTracks = this.tracks.getValue();
-            this.tracks.next(Object.assign(currentTracks, newTracks));
-          });
-
         }
-
+      });
+      if (resolved.length > 0) {
+        Promise.all(resolved).then(() => {
+          const currentTracks = this.tracks.getValue();
+          this.tracks.next(Object.assign(currentTracks, newTracks));
+        });
+      }
       this.cachedSelectedPlaylistIds = playlistIds;
     }
   }

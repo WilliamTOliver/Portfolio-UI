@@ -1,9 +1,7 @@
 import {
   Component,
   OnInit,
-  ViewChild,
-  Output,
-  EventEmitter
+  ViewChild
 } from '@angular/core';
 import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { SpotifyService } from '../spotify/spotify.service';
