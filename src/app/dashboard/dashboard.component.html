@@ -1,7 +1,14 @@
 <div class="dashboard">
   <div class="row" *ngIf="spotifyAuthorized">
-    <app-search-table class="col-4"></app-search-table>
-    <app-track-table class="col-8"></app-track-table>
+    <div>
+        <app-search-table></app-search-table>
+    </div>
+    <div>
+      <div *ngFor="let playlist of selectedPlaylistsWithTracks">
+        <app-track-table type="playlist" [data]="playlist"></app-track-table>
+      </div>
+    </div>
+
     <!-- <app-footer class="d-block d-sm-none"></app-footer>
     <app-footer class="d-none d-sm-block"></app-footer> -->
   </div>

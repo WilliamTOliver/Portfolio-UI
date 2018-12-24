@@ -16,7 +16,7 @@ import { SpotifyService } from '../spotify/spotify.service';
 export class SearchTableComponent implements OnInit {
   // TABLE PROPERTIES
   dataSource: MatTableDataSource<any>;
-  displayedColumns: string[] = ['name', 'tracks'];
+  displayedColumns: string[] = ['name', 'numTracks'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   selected: any[] = [];

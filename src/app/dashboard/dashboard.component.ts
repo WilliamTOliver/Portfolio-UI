@@ -8,7 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  selectedPlaylists: any[] = [];
+  selectedPlaylistsWithTracks: any[] = [];
   get spotifyAuthorized(): boolean {
     return Boolean(sessionStorage.getItem('spotifyAuth'));
   }
@@ -29,6 +29,15 @@ export class DashboardComponent implements OnInit {
         .then(userInfo => this.spotifyService.setUser(userInfo.data))
         .catch(console.log);
     }
+    this.spotifyService.tracks.subscribe(tracks => {
+      const newSelectedPlaylists = [];
+      const currentSelectedPlaylists = this.spotifyService.selectedPlaylists.getValue();
+      for (const playlist of currentSelectedPlaylists) {
+        playlist.tracks = tracks[playlist.id];
+        newSelectedPlaylists.push(playlist);
+      }
+      this.selectedPlaylistsWithTracks = newSelectedPlaylists;
+    });
   }
   onSpotifyTokenSuccess(response) {
     sessionStorage.setItem('spotifyAuth', JSON.stringify(response.data));

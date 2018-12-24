@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-import { SpotifyService } from '../spotify/spotify.service';
 
 @Component({
   selector: 'app-track-table',
@@ -8,15 +7,21 @@ import { SpotifyService } from '../spotify/spotify.service';
   styleUrls: ['./track-table.component.scss']
 })
 export class TrackTableComponent implements OnInit {
+  @Input()
+  data: any;
+  @Input()
+  type: string;
   // TABLE PROPERTIES
-  dataSource: MatTableDataSource<any>;
-  displayedColumns: string[] = ['name', 'id'];
+  trackData: MatTableDataSource<any>;
+  displayedColumns: string[] = ['name'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private spotifyService: SpotifyService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.spotifyService.tracks.subscribe(console.log);
+    console.log(this.data.tracks.map(trackobj => trackobj.track));
+    console.log(this.type);
+    this.trackData = new MatTableDataSource(this.data.tracks.map(trackobj => trackobj.track));
   }
   select(row) {
   }

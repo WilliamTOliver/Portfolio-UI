@@ -19,9 +19,9 @@
               <td mat-cell *matCellDef="let row">{{ row.name }}</td>
             </ng-container>
             <!-- Tracks Column -->
-            <ng-container matColumnDef="tracks">
+            <ng-container matColumnDef="numTracks">
               <th mat-header-cell *matHeaderCellDef mat-sort-header>Tracks</th>
-              <td mat-cell *matCellDef="let row" [ngClass]="getTracksClass(row.tracks)">{{ row.tracks }}</td>
+              <td mat-cell *matCellDef="let row" [ngClass]="getTracksClass(row.numTracks)">{{ row.numTracks }}</td>
             </ng-container>
             <!-- ROW/COL INSTANTIATION ~ Columns must be defined and referenced in intended order in displayedColumns-->
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

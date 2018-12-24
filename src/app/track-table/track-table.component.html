@@ -1,14 +1,38 @@
+<!-- DESKTOP -->
 <div>
-    <!-- DESKTOP -->
-    <div class="row d-none d-sm-block">
-      <div>
-        
-      <div></div>
-    </div>
-    <!-- WIP MOBILE -->
-    <!-- <div class="d-block d-sm-none">
-      <div></div>
-      <div></div>
-    </div> -->
-  </div>
-  
+  <mat-card>
+    <mat-card-header>
+      <div mat-card-avatar><img [src]="data.image" /></div>
+      <mat-card-title>{{data.name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="search-table-group">
+        <mat-form-field>
+          <input
+            matInput
+            (keyup)="applyFilter($event.target.value)"
+            placeholder="Filter"
+          />
+        </mat-form-field>
+        <div class="mat-elevation-z9">
+          <table mat-table [dataSource]="trackData" matSort>
+            <!-- COLUMN DEFINITIONS -->
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+              <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+            </ng-container>
+            <!-- ROW/COL INSTANTIATION ~ Columns must be defined and referenced in intended order in displayedColumns-->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumns"
+              (click)="select(row)"
+              [class]="row.selected ? 'selected' : 'unselected'"
+            ></tr>
+          </table>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

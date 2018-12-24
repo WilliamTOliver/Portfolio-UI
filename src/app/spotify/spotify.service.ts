@@ -52,20 +52,30 @@ export class SpotifyService {
         }
       });
       const currentTracks = this.tracks.getValue();
-      const trimmedTracks = currentTracks.filter((track) => {
-        if (removedPlaylistIds.map((playlist) => playlist).indexOf(track.playlistId) === -1) {
-          return track;
-        }
-      });
-      this.tracks.next(trimmedTracks);
+      for (const id of removedPlaylistIds) {
+        delete currentTracks[id];
+      }
+      this.tracks.next(currentTracks);
       this.cachedSelectedPlaylistIds = playlistIds;
     } else {
       // Positive Diff - need to get tracks
       const addedPlaylistIds = playlistIds.filter((id) => this.cachedSelectedPlaylistIds.indexOf(id) === -1);
-      Promise.all(addedPlaylistIds.map((id) => this.fetchPlaylistTracks(id))).then((...args) => {
-        const currentTracks = this.tracks.getValue();
-        console.log(args);
-      });
+        const resolved = [];
+        const newTracks = {};
+        addedPlaylistIds.map((id) => {
+          const promise = this.fetchPlaylistTracks(id).then(response => {
+            newTracks[id] = response.data;
+          });
+          resolved.push(promise);
+        });
+        if (resolved.length > 0) {
+          Promise.all(resolved).then((tracks) => {
+            const currentTracks = this.tracks.getValue();
+            this.tracks.next(Object.assign(currentTracks, newTracks));
+          });
+
+        }
+
       this.cachedSelectedPlaylistIds = playlistIds;
     }
   }
@@ -85,7 +95,7 @@ export class SpotifyService {
             id: playlist.id,
             image: playlist.images && playlist.images.length > 0 && playlist.images[0].url,
             name: playlist.name,
-            tracks: playlist.tracks.total
+            numTracks: playlist.tracks.total
           };
         });
         return filteredPlaylists;
@@ -113,7 +123,6 @@ export class SpotifyService {
     }
   }
   public fetchPlaylistTracks(id) {
-    console.log('​SpotifyService -> fetchPlaylistTracks -> id', id);
     // NOT CACHED ~ cached in onSelectedPlaylistsChange
     return API.get(APIURLS.playlistTracks.replace(':id', id)).then((tracks) => {
       return tracks;
