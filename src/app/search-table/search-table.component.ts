@@ -9,7 +9,7 @@ import { SpotifyService } from '../spotify/spotify.service';
 })
 export class SearchTableComponent implements OnInit {
   // TABLE PROPERTIES
-  dataSource: MatTableDataSource<any>;
+  searchData: MatTableDataSource<any>;
   displayedColumns: string[] = ['name', 'numTracks'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -42,10 +42,10 @@ export class SearchTableComponent implements OnInit {
       : 'tracks-red';
   }
   public applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.searchData.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    if (this.searchData.paginator) {
+      this.searchData.paginator.firstPage();
     }
   }
   // PRIVATE METHODS
@@ -61,8 +61,8 @@ export class SearchTableComponent implements OnInit {
       playlist.selected = false;
       return playlist;
     });
-    this.dataSource = new MatTableDataSource(deselectedPlaylists);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.searchData = new MatTableDataSource(deselectedPlaylists);
+    this.searchData.paginator = this.paginator;
+    this.searchData.sort = this.sort;
   }
 }

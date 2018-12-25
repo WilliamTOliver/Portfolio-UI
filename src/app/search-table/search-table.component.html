@@ -7,11 +7,11 @@
           <input
             matInput
             (keyup)="applyFilter($event.target.value)"
-            placeholder="Filter"
+            placeholder="Filter Playlists"
           />
         </mat-form-field>
-        <div class="mat-elevation-z8">
-          <table mat-table [dataSource]="dataSource" matSort>
+        <div>
+          <table mat-table [dataSource]="searchData" matSort class="mat-elevation-z8">
             <!-- COLUMN DEFINITIONS -->
             <!-- Name Column -->
             <ng-container matColumnDef="name">

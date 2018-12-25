@@ -1,36 +1,25 @@
 <!-- DESKTOP -->
 
 <mat-menu #options="matMenu">
-  <button
-    mat-menu-item
-    [matMenuTriggerFor]="refactor"
-  >Refactor</button>
+  <button mat-menu-item [matMenuTriggerFor]="refactor">Refactor</button>
   <button mat-menu-item>Taste Profile</button>
   <button mat-menu-item>Duplicate</button>
   <button mat-menu-item class="delete">Delete</button>
 </mat-menu>
 
 <mat-menu #refactor="matMenu">
-  <button
-    mat-menu-item
-    [matMenuTriggerFor]="refactorby"
-  >Split-By</button>
-  <button
-    mat-menu-item
-    [matMenuTriggerFor]="refactorby"
-  >Reorder-By</button>
+  <button mat-menu-item [matMenuTriggerFor]="refactorby">Split-By</button>
+  <button mat-menu-item [matMenuTriggerFor]="refactorby">Reorder-By</button>
   <button mat-menu-item>Simple Split</button>
   <button mat-menu-item>Smart Refactor</button>
 </mat-menu>
 
 <mat-menu #refactorby="matMenu">
-  <button mat-menu-item>Year</button>
-  <button mat-menu-item>Artist</button>
+  <button mat-menu-item>Year</button> <button mat-menu-item>Artist</button>
   <button mat-menu-item>Popularity</button>
   <button mat-menu-item>Valance(mood)</button>
   <button mat-menu-item>Time Signature</button>
-  <button mat-menu-item>Speed</button>
-  <button mat-menu-item>Energy</button>
+  <button mat-menu-item>Speed</button> <button mat-menu-item>Energy</button>
 </mat-menu>
 <div>
   <mat-card>
@@ -38,52 +27,46 @@
       <div class="col-3"><img [src]="data.image" /></div>
       <div class="col-8">
         <div>
-          <p><strong>{{data.name}}</strong></p>
+          <p>
+            <strong>{{ data.name }}</strong>
+          </p>
         </div>
         <div>
-          <button
-            mat-stroked-button
-            [matMenuTriggerFor]="options"
-          >Options</button>
+          <button mat-stroked-button [matMenuTriggerFor]="options">
+            Options
+          </button>
         </div>
       </div>
     </div>
-    <mat-card-content class="row">
-      <div
-        [ngClass]="hasTracks ? '' : 'hide'"
-        class="search-table-group"
-      >
+    <div class="row">
+      <div [ngClass]="hasTracks ? '' : 'hide'" class="search-table-group">
         <mat-form-field>
           <input
             matInput
             (keyup)="applyFilter($event.target.value)"
-            placeholder="Filter"
+            placeholder="Filter Tracks"
           />
         </mat-form-field>
         <div class="mat-elevation-z9">
-          <table
-            mat-table
-            [dataSource]="trackData"
-            matSort
-          >
+          <table mat-table [dataSource]="trackData" matSort>
             <!-- COLUMN DEFINITIONS -->
             <!-- Name Column -->
             <ng-container matColumnDef="name">
-              <th
-                mat-header-cell
-                *matHeaderCellDef
-                mat-sort-header
-              >Name</th>
-              <td
-                mat-cell
-                *matCellDef="let row"
-              >{{ row.name }}</td>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+              <td mat-cell *matCellDef="let row">{{ row.name }}</td>
+            </ng-container>
+            <!-- Album Column -->
+            <ng-container matColumnDef="album">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Album</th>
+              <td mat-cell *matCellDef="let row">{{ row.album }}</td>
+            </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="artist">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Artist</th>
+              <td mat-cell *matCellDef="let row">{{ row.artist }}</td>
             </ng-container>
             <!-- ROW/COL INSTANTIATION ~ Columns must be defined and referenced in intended order in displayedColumns-->
-            <tr
-              mat-header-row
-              *matHeaderRowDef="displayedColumns"
-            ></tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr
               mat-row
               *matRowDef="let row; columns: displayedColumns"
@@ -94,8 +77,11 @@
         </div>
       </div>
       <div [ngClass]="hasTracks ? 'hide' : ''">
-        <p>Playlist too large, please refactor manually or with automated actions above.</p>
+        <p>
+          Playlist too large, please refactor manually or with automated actions
+          above.
+        </p>
       </div>
-    </mat-card-content>
+    </div>
   </mat-card>
 </div>

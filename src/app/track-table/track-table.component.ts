@@ -16,15 +16,23 @@ export class TrackTableComponent implements OnInit {
   }
   // TABLE PROPERTIES
   trackData: MatTableDataSource<any>;
-  displayedColumns: string[] = ['name'];
+  displayedColumns: string[] = ['name', 'album', 'artist'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor() {}
 
   ngOnInit() {
     this.trackData = new MatTableDataSource(this.data.tracks);
+    this.trackData.paginator = this.paginator;
+    this.trackData.sort = this.sort;
   }
   select(row) {}
   getTracksClass(tracks) {}
-  applyFilter(filterValue: string) {}
+  applyFilter(filterValue: string) {
+    this.trackData.filter = filterValue.trim().toLowerCase();
+
+    if (this.trackData.paginator) {
+      this.trackData.paginator.firstPage();
+    }
+  }
 }
