@@ -101,7 +101,7 @@ export class SpotifyService {
       this.trimDeselectedPlaylistTracks(playlistIds);
     } else {
       // Positive Diff
-      this.updateTracksWithNewlySelectedPlaylistTracks(playlistIds);
+      this.updateTracksWithNewlySelectedPlaylistTracks(playlistIds, playlists);
     }
     this.cachedSelectedPlaylistIds = playlistIds;
   }
@@ -117,11 +117,11 @@ export class SpotifyService {
     }
     this.tracks.next(currentTracks);
   }
-  private updateTracksWithNewlySelectedPlaylistTracks(ids) {
+  private updateTracksWithNewlySelectedPlaylistTracks(ids, playlists) {
     const addedPlaylistIds = ids.filter(
       id => this.cachedSelectedPlaylistIds.indexOf(id) === -1
     );
-    const oversizedPlaylistIds = ids
+    const oversizedPlaylistIds = playlists
       .filter(playlist => playlist.numTracks > 100 && playlist.id)
       .map(obj => obj.id);
     const resolved = [];
