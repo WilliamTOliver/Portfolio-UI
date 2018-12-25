@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateChild, CanActivate, Router } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  CanActivateChild,
+  CanActivate,
+  Router
+} from '@angular/router';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -10,19 +16,25 @@ export class AuthGuard implements CanActivateChild, CanActivate {
   checkAuth(): Promise<boolean> {
     return this.authService
       .checkAuth()
-      .then((auth) => {
+      .then(auth => {
         return true;
       })
-      .catch((err) => {
+      .catch(err => {
         sessionStorage.clear();
         this.router.navigate(['login']);
         return false;
       });
   }
-  canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> | boolean {
+  canActivate(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Promise<boolean> | boolean {
     return this.checkAuth();
   }
-  canActivateChild(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> | boolean {
+  canActivateChild(
+    next: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Promise<boolean> | boolean {
     return this.checkAuth();
   }
 }

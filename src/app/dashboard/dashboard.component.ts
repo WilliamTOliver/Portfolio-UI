@@ -29,24 +29,25 @@ export class DashboardComponent implements OnInit {
         .then(userInfo => this.spotifyService.setUser(userInfo.data))
         .catch(console.log);
     }
-    this.spotifyService.tracks.subscribe(tracks => {
-      const newSelectedPlaylists = [];
-      const currentSelectedPlaylists = this.spotifyService.selectedPlaylists.getValue();
-      for (const playlist of currentSelectedPlaylists) {
-        playlist.tracks = tracks[playlist.id];
-        newSelectedPlaylists.push(playlist);
-      }
-      this.selectedPlaylistsWithTracks = newSelectedPlaylists;
-    });
+    this.spotifyService.tracks.subscribe(this.onTracksChange.bind(this));
   }
-  onSpotifyTokenSuccess(response) {
+  public navigate(page) {
+    this.router.navigate([`dashboard/${page}`]);
+  }
+  public spotifyLogin() {
+    this.spotifyService.requestAuth();
+  }
+  private onSpotifyTokenSuccess(response) {
     sessionStorage.setItem('spotifyAuth', JSON.stringify(response.data));
     this.router.navigate(['/dashboard']);
   }
-  navigate(page) {
-    this.router.navigate([`dashboard/${page}`]);
-  }
-  spotifyLogin() {
-    this.spotifyService.requestAuth();
+  private onTracksChange(tracks) {
+    const newSelectedPlaylists = [];
+    const currentSelectedPlaylists = this.spotifyService.selectedPlaylists.getValue();
+    for (const playlist of currentSelectedPlaylists) {
+      playlist.tracks = tracks[playlist.id];
+      newSelectedPlaylists.push(playlist);
+    }
+    this.selectedPlaylistsWithTracks = newSelectedPlaylists;
   }
 }

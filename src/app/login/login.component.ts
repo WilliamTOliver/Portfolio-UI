@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 
-export class MyErrorStateMatcher implements ErrorStateMatcher {
+export class LoginErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
-    // not sure why the double !
+    // not sure why the !!
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }
@@ -17,14 +17,12 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   passwordFormControl = new FormControl('', [Validators.required]);
-  matcher = new MyErrorStateMatcher();
+  matcher = new LoginErrorStateMatcher();
 
   constructor(private authService: AuthService, private router: Router) {}
-
-  ngOnInit() {}
   async submitLogin(event) {
     try {
       const auth: any = await this.authService.login({

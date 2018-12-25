@@ -6,6 +6,8 @@ const api: AxiosInstance = axios.create({
 });
 api.interceptors.request.use(
   (config) => {
+    // Apply Auth Tokens To All Requests ~ API decides which to consume and which not to consume
+    // This keeps UI handling dumb to what endpoints are or aren't secure
     const spotifyAuth = JSON.parse(sessionStorage.getItem('spotifyAuth'));
     config.headers.Authorization = 'Bearer: ' + sessionStorage.getItem('authorization');
     config.headers.common['X-Spotify-Auth'] = spotifyAuth && spotifyAuth.access_token;

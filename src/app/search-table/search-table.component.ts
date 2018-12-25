@@ -18,24 +18,13 @@ export class SearchTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   selected: any[] = [];
+  // LIFE CYCLE HOOKS
   constructor(private spotifyService: SpotifyService) {}
-
   ngOnInit() {
-    this.spotifyService
-      .getUserPlaylists()
-      .then(playlists => {
-        this.dataSource = new MatTableDataSource(
-          playlists.map(playlist => {
-            playlist.selected = false;
-            return playlist;
-          })
-        );
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      })
-      .catch(console.log);
+    this.buildTable();
   }
-  select(row) {
+  // PUBLIC METHODS
+  public select(row) {
     row.selected = !row.selected;
     if (row.selected) {
       this.selected.push(row);
@@ -45,7 +34,7 @@ export class SearchTableComponent implements OnInit {
     this.spotifyService.selectedPlaylists.next(this.selected);
     sessionStorage.setItem('selectedPlaylists', JSON.stringify(this.selected));
   }
-  getTracksClass(tracks) {
+  public getTracksClass(tracks) {
     return tracks < 10
       ? 'tracks-blue'
       : tracks < 25
@@ -56,11 +45,27 @@ export class SearchTableComponent implements OnInit {
       ? 'tracks-orange'
       : 'tracks-red';
   }
-  applyFilter(filterValue: string) {
+  public applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+  // PRIVATE METHODS
+  private buildTable() {
+    this.spotifyService
+    .getUserPlaylists()
+    .then(playlists => {
+      this.dataSource = new MatTableDataSource(
+        playlists.map(playlist => {
+          playlist.selected = false;
+          return playlist;
+        })
+      );
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
+    .catch(console.log);
   }
 }
