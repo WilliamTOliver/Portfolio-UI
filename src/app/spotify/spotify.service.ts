@@ -107,7 +107,7 @@ export class SpotifyService {
   private onSelectedPlaylistsChange(playlists) {
     const playlistIds = playlists.map(playlist => playlist.id);
     if (this.cachedSelectedPlaylistIds.length > playlists.length) {
-      // Negative diff - need to filter out tracks
+      // Negative diff
       this.trimDeselectedPlaylistTracks(playlistIds);
     } else {
       // Positive Diff
@@ -127,7 +127,7 @@ export class SpotifyService {
     }
     this.tracks.next(currentTracks);
   }
-  updateTracksWithNewlySelectedPlaylistTracks(ids) {
+  private updateTracksWithNewlySelectedPlaylistTracks(ids) {
     const addedPlaylistIds = ids.filter(
       id => this.cachedSelectedPlaylistIds.indexOf(id) === -1
     );

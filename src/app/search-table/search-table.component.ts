@@ -1,8 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewChild
-} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { SpotifyService } from '../spotify/spotify.service';
 
@@ -53,19 +49,20 @@ export class SearchTableComponent implements OnInit {
     }
   }
   // PRIVATE METHODS
-  private buildTable() {
-    this.spotifyService
-    .getUserPlaylists()
-    .then(playlists => {
-      this.dataSource = new MatTableDataSource(
-        playlists.map(playlist => {
-          playlist.selected = false;
-          return playlist;
-        })
-      );
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    })
-    .catch(console.log);
+  private async buildTable() {
+    let playlists;
+    if (Boolean(sessionStorage.getItem('userPlaylists'))) {
+      playlists = JSON.parse(sessionStorage.getItem('userPlaylists'));
+    } else {
+      playlists = await this.spotifyService.getUserPlaylists();
+      sessionStorage.setItem('userPlaylists', JSON.stringify(playlists));
+    }
+    const deselectedPlaylists = playlists.map(playlist => {
+      playlist.selected = false;
+      return playlist;
+    });
+    this.dataSource = new MatTableDataSource(deselectedPlaylists);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 }
