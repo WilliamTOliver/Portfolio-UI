@@ -22,7 +22,7 @@ export class TrackTableComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.trackData = new MatTableDataSource(this.data.tracks.map((trackobj) => trackobj.track));
+    this.trackData = new MatTableDataSource(this.data.tracks);
   }
   select(row) {}
   getTracksClass(tracks) {}

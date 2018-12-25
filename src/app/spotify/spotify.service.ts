@@ -39,17 +39,7 @@ export class SpotifyService {
   public getUserPlaylists(): Promise<any> {
     return this.fetchUserPlaylists()
       .then(response => {
-        const filteredPlaylists = response.data.items.map(playlist => {
-          return {
-            id: playlist.id,
-            image:
-              playlist.images &&
-              playlist.images.length > 0 &&
-              playlist.images[0].url,
-            name: playlist.name,
-            numTracks: playlist.tracks.total
-          };
-        });
+        const filteredPlaylists = response.data;
         return filteredPlaylists;
       })
       .catch(err => console.log);
