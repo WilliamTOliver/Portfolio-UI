@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { SpotifyService } from '../spotify/spotify.service';
 
 @Component({
   selector: 'app-track-table',
@@ -19,7 +20,7 @@ export class TrackTableComponent implements OnInit {
   displayedColumns: string[] = ['name', 'album', 'artist'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor() {}
+  constructor(private spotifyService: SpotifyService) {}
 
   ngOnInit() {
     this.trackData = new MatTableDataSource(this.data.tracks);
@@ -34,5 +35,9 @@ export class TrackTableComponent implements OnInit {
     if (this.trackData.paginator) {
       this.trackData.paginator.firstPage();
     }
+  }
+  refactorPlaylist() {
+    console.log(this.data)
+    this.spotifyService.refactorPlaylist(this.data.id)
   }
 }

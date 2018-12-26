@@ -76,6 +76,9 @@ export class SpotifyService {
       return tracks;
     });
   }
+  public refactorPlaylist(id) {
+    return API.post(APIURLS.playlistRefactor.replace(':id', id), {});
+  }
   private setAuthRedirect() {
     const options = {
       response_type: 'code',
