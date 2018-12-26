@@ -8,18 +8,33 @@
 </mat-menu>
 
 <mat-menu #refactor="matMenu">
-  <button mat-menu-item [matMenuTriggerFor]="refactorby">Split-By</button>
-  <button mat-menu-item [matMenuTriggerFor]="refactorby">Reorder-By</button>
-  <button mat-menu-item>Simple Split</button>
-  <button mat-menu-item>Smart Refactor</button>
+  <button mat-menu-item [matMenuTriggerFor]="splitby">Split-By</button>
+  <button mat-menu-item [matMenuTriggerFor]="reorderby">Reorder-By</button>
+  <button mat-menu-item  (click)="refactorPlaylist('', 'simple')">Simple Split</button>
+  <button mat-menu-item  (click)="refactorPlaylist('', 'smart')">Smart Refactor</button>
 </mat-menu>
 
-<mat-menu #refactorby="matMenu">
-  <button mat-menu-item (click)="refactorPlaylist()">Year</button> <button mat-menu-item>Artist</button>
-  <button mat-menu-item>Popularity</button>
-  <button mat-menu-item>Valance(mood)</button>
-  <button mat-menu-item>Time Signature</button>
-  <button mat-menu-item>Speed</button> <button mat-menu-item>Energy</button>
+<mat-menu #splitby="matMenu">
+  <button mat-menu-item (click)="refactorPlaylist('split', 'year')">Year</button>
+  <button mat-menu-item (click)="refactorPlaylist('split', 'artist')">Artist</button>
+  <button mat-menu-item (click)="refactorPlaylist('split', 'popularity')">Popularity</button>
+  <button mat-menu-item (click)="refactorPlaylist('split', 'mood')">Mood</button>
+  <button mat-menu-item (click)="refactorPlaylist('split', 'time_signature')">Time Signature</button>
+  <button mat-menu-item (click)="refactorPlaylist('split', 'tempo')">Speed</button>
+  <button mat-menu-item (click)="refactorPlaylist('split', 'energy')">Energy</button>
+  <button mat-menu-item (click)="refactorPlaylist('split', 'acousticness')">Acoustic</button>
+  <button mat-menu-item (click)="refactorPlaylist('split', 'instrumentalness')">Instrumental</button>
+</mat-menu>
+<mat-menu #reorderby="matMenu">
+  <button mat-menu-item (click)="refactorPlaylist('reorder', 'year')">Year</button>
+  <button mat-menu-item (click)="refactorPlaylist('reorder', 'artist')">Artist</button>
+  <button mat-menu-item (click)="refactorPlaylist('reorder', 'popularity')">Popularity</button>
+  <button mat-menu-item (click)="refactorPlaylist('reorder', 'mood')">Mood</button>
+  <button mat-menu-item (click)="refactorPlaylist('reorder', 'time_signature')">Time Signature</button>
+  <button mat-menu-item (click)="refactorPlaylist('reorder', 'speed')">Speed</button>
+  <button mat-menu-item (click)="refactorPlaylist('reorder', 'energy')">Energy</button>
+  <button mat-menu-item (click)="refactorPlaylist('reorder', 'acousticness')">Acoustic</button>
+  <button mat-menu-item (click)="refactorPlaylist('reorder', 'instrumentalness')">Instrumental</button>
 </mat-menu>
 <div>
   <mat-card>

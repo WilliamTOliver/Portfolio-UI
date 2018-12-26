@@ -24,9 +24,7 @@ export class SpotifyService {
   }
   constructor(private authService: AuthService) {
     this.setAuthRedirect();
-    this.selectedPlaylists.subscribe(playlists =>
-      this.onSelectedPlaylistsChange(playlists)
-    );
+    this.selectedPlaylists.subscribe((playlists) => this.onSelectedPlaylistsChange(playlists));
   }
   public requestAuth() {
     window.location.href = this.authorizationRedirect;
@@ -38,11 +36,11 @@ export class SpotifyService {
   }
   public getUserPlaylists(): Promise<any> {
     return this.fetchUserPlaylists()
-      .then(response => {
+      .then((response) => {
         const filteredPlaylists = response.data;
         return filteredPlaylists;
       })
-      .catch(err => console.log);
+      .catch((err) => console.log);
   }
 
   // API REQUESTS
@@ -55,16 +53,14 @@ export class SpotifyService {
   }
   public getUserInfo() {
     const storedAuth = sessionStorage.getItem('spotifyAuth');
-    return storedAuth
-      ? Promise.resolve(JSON.parse(storedAuth))
-      : API.get(APIURLS.spotifyUser);
+    return storedAuth ? Promise.resolve(JSON.parse(storedAuth)) : API.get(APIURLS.spotifyUser);
   }
 
   public fetchUserPlaylists() {
     if (this.currentUserPlaylists) {
       return Promise.resolve(this.currentUserPlaylists);
     } else {
-      return API.get(APIURLS.userPlaylists).then(playlists => {
+      return API.get(APIURLS.userPlaylists).then((playlists) => {
         this.currentUserPlaylists = playlists;
         return playlists;
       });
@@ -72,19 +68,19 @@ export class SpotifyService {
   }
   public fetchPlaylistTracks(id) {
     // NOT CACHED ~ cached in onSelectedPlaylistsChange
-    return API.get(APIURLS.playlistTracks.replace(':id', id)).then(tracks => {
+    return API.get(APIURLS.playlistTracks.replace(':id', id)).then((tracks) => {
       return tracks;
     });
   }
-  public refactorPlaylist(id) {
-    return API.post(APIURLS.playlistRefactor.replace(':id', id), {});
+  public refactorPlaylist(id, body) {
+    return API.post(APIURLS.playlistRefactor.replace(':id', id), body);
   }
   private setAuthRedirect() {
     const options = {
       response_type: 'code',
       client_id: environment.spotifyClientId,
       scope:
-        'user-read-private user-read-recently-played user-top-read playlist-modify-private playlist-read-private',
+        'user-read-private user-read-recently-played user-top-read playlist-modify-public streaming playlist-modify-private playlist-read-private',
       redirect_uri: this.redirectUrl,
       state: this.authService.token
     };
@@ -94,11 +90,10 @@ export class SpotifyService {
         params.set(key, options[key]);
       }
     }
-    this.authorizationRedirect =
-      'https://accounts.spotify.com/authorize?' + params.toString();
+    this.authorizationRedirect = 'https://accounts.spotify.com/authorize?' + params.toString();
   }
   private onSelectedPlaylistsChange(playlists) {
-    const playlistIds = playlists.map(playlist => playlist.id);
+    const playlistIds = playlists.map((playlist) => playlist.id);
     if (this.cachedSelectedPlaylistIds.length > playlists.length) {
       // Negative diff
       this.trimDeselectedPlaylistTracks(playlistIds);
@@ -109,7 +104,7 @@ export class SpotifyService {
     this.cachedSelectedPlaylistIds = playlistIds;
   }
   private trimDeselectedPlaylistTracks(ids) {
-    const removedPlaylistIds = this.cachedSelectedPlaylistIds.filter(id => {
+    const removedPlaylistIds = this.cachedSelectedPlaylistIds.filter((id) => {
       if (ids.indexOf(id) === -1) {
         return id;
       }
@@ -121,21 +116,19 @@ export class SpotifyService {
     this.tracks.next(currentTracks);
   }
   private updateTracksWithNewlySelectedPlaylistTracks(ids, playlists) {
-    const addedPlaylistIds = ids.filter(
-      id => this.cachedSelectedPlaylistIds.indexOf(id) === -1
-    );
+    const addedPlaylistIds = ids.filter((id) => this.cachedSelectedPlaylistIds.indexOf(id) === -1);
     const oversizedPlaylistIds = playlists
-      .filter(playlist => playlist.numTracks > 100 && playlist.id)
-      .map(obj => obj.id);
+      .filter((playlist) => playlist.numTracks > 100 && playlist.id)
+      .map((obj) => obj.id);
     const resolved = [];
     const newTracks = {};
-    addedPlaylistIds.map(id => {
+    addedPlaylistIds.map((id) => {
       if (oversizedPlaylistIds.indexOf(id) > -1) {
         // Playlist too big to fetch all tracks and details in one go, force playlist refactor before proceeding.
         newTracks[id] = [];
         resolved.push(Promise.resolve());
       } else {
-        const promise = this.fetchPlaylistTracks(id).then(response => {
+        const promise = this.fetchPlaylistTracks(id).then((response) => {
           newTracks[id] = response.data;
         });
         resolved.push(promise);

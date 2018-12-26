@@ -36,8 +36,7 @@ export class TrackTableComponent implements OnInit {
       this.trackData.paginator.firstPage();
     }
   }
-  refactorPlaylist() {
-    console.log(this.data)
-    this.spotifyService.refactorPlaylist(this.data.id)
+  refactorPlaylist(method, by) {
+    this.spotifyService.refactorPlaylist(this.data.id, {method, by, playlistName: this.data.name});
   }
 }
