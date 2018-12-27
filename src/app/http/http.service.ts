@@ -28,6 +28,14 @@ export const spotifyAPI: AxiosInstance = axios.create({
   baseURL: 'https://api.spotify.com/v1',
   timeout: 10000
 });
+spotifyAPI.interceptors.response.use(
+  (config) => {
+    if (config.status === 401 || config.status === 403) {
+      sessionStorage.clear();
+    }
+    return config;
+  }
+);
 export const httpService: AxiosInstance = axios.create({
   timeout: 10000
 });
