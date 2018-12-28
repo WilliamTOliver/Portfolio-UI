@@ -12,27 +12,11 @@ export class DashboardComponent implements OnInit {
   get spotifyAuthorized(): boolean {
     return Boolean(sessionStorage.getItem('spotifyAuth'));
   }
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private spotifyService: SpotifyService
-  ) {}
+  constructor(private route: ActivatedRoute, private router: Router, private spotifyService: SpotifyService) {}
   ngOnInit() {
     const params: any = this.route.queryParams;
     if (params && params.value && params.value.code) {
-      this.spotifyService
-        .requestToken(params.value.code)
-        .then(this.onSpotifyTokenSuccess.bind(this));
-    } else {
-      this.spotifyService
-        .getUserInfo()
-        .then(userInfo => {
-          this.spotifyService.setUser(userInfo.data);
-          this.spotifyService.getUserPlaylists().then(playlists => {
-            this.spotifyService.userPlaylists.next(playlists);
-          });
-        })
-        .catch(console.log);
+      this.spotifyService.requestToken(params.value.code).then(this.onSpotifyTokenSuccess.bind(this));
     }
     this.spotifyService.tracks.subscribe(this.onTracksChange.bind(this));
   }
@@ -44,6 +28,15 @@ export class DashboardComponent implements OnInit {
   }
   private onSpotifyTokenSuccess(response) {
     sessionStorage.setItem('spotifyAuth', JSON.stringify(response.data));
+    this.spotifyService
+    .getUserInfo()
+    .then((userInfo) => {
+      this.spotifyService.setUser(userInfo.data);
+    })
+    .catch(console.log);
+    this.spotifyService.getUserPlaylists().then((playlists) => {
+      this.spotifyService.userPlaylists.next(playlists);
+    });
     this.router.navigate(['/dashboard']);
   }
   private onTracksChange(tracks) {

@@ -18,7 +18,6 @@ export class SpotifyService {
   private cachedSelectedPlaylistIds: string[] = [];
   private authorizationRedirect: string;
   private redirectUrl = 'http://localhost:4200/dashboard';
-  private currentUserPlaylists: any;
   // Refactor into Observable/Behavior Subject?
   public get spotifyAuth() {
     return JSON.parse(sessionStorage.getItem('spotifyAuth'));
@@ -38,15 +37,15 @@ export class SpotifyService {
   public getUserPlaylists(): Promise<any> {
     const storedPlaylists = sessionStorage.getItem('userPlaylists');
     if (storedPlaylists && typeof storedPlaylists === 'string') {
-      return Promise.resolve( JSON.parse(sessionStorage.getItem('userPlaylists')));
+      return Promise.resolve(JSON.parse(sessionStorage.getItem('userPlaylists')));
     } else {
       return this.fetchUserPlaylists()
-      .then((response) => {
-        const filteredPlaylists = response.data;
-        sessionStorage.setItem('userPlaylists', JSON.stringify(filteredPlaylists));
-        return filteredPlaylists;
-      })
-      .catch(console.log);
+        .then((response) => {
+          const filteredPlaylists = response.data;
+          sessionStorage.setItem('userPlaylists', JSON.stringify(filteredPlaylists));
+          return filteredPlaylists;
+        })
+        .catch(console.log);
     }
   }
 
@@ -59,19 +58,14 @@ export class SpotifyService {
     });
   }
   public getUserInfo() {
-    const storedAuth = sessionStorage.getItem('spotifyAuth');
-    return storedAuth ? Promise.resolve(JSON.parse(storedAuth)) : API.get(APIURLS.spotifyUser);
+    const storedUser = sessionStorage.getItem('spotifyAuth') && JSON.parse(sessionStorage.getItem('spotifyAuth')).user;
+    return storedUser ? Promise.resolve(JSON.parse(storedUser)) : API.get(APIURLS.spotifyUser);
   }
 
   public fetchUserPlaylists() {
-    if (this.currentUserPlaylists) {
-      return Promise.resolve(this.currentUserPlaylists);
-    } else {
-      return API.get(APIURLS.userPlaylists).then((playlists) => {
-        this.currentUserPlaylists = playlists;
-        return playlists;
-      });
-    }
+    return API.get(APIURLS.userPlaylists).then((playlists) => {
+      return playlists;
+    });
   }
   public fetchPlaylistTracks(id) {
     // NOT CACHED ~ cached in onSelectedPlaylistsChange
@@ -80,11 +74,10 @@ export class SpotifyService {
     });
   }
   public refactorPlaylist(id, body) {
-    return API.post(APIURLS.playlistRefactor.replace(':id', id), body).then(response => {
+    API.post(APIURLS.playlistRefactor.replace(':id', id), body).then((response) => {
       sessionStorage.removeItem('userPlaylists');
-      this.getUserPlaylists().then(playlists => {
+      this.getUserPlaylists().then((playlists) => {
         this.userPlaylists.next(playlists);
-        return;
       });
     });
   }
@@ -93,6 +86,7 @@ export class SpotifyService {
       response_type: 'code',
       client_id: environment.spotifyClientId,
       scope:
+        // tslint:disable-next-line:max-line-length
         'user-read-private user-read-recently-played user-top-read playlist-modify-public streaming playlist-modify-private playlist-read-private',
       redirect_uri: this.redirectUrl,
       state: this.authService.token
