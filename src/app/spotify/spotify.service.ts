@@ -10,6 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SpotifyService {
   // Public Properties
+  public userPlaylists = new BehaviorSubject<any>([]);
   public selectedPlaylists = new BehaviorSubject<any>([]);
   public tracks = new BehaviorSubject<any>([]);
 
@@ -35,12 +36,18 @@ export class SpotifyService {
     sessionStorage.setItem('spotifyAuth', JSON.stringify(spotifyAuth));
   }
   public getUserPlaylists(): Promise<any> {
-    return this.fetchUserPlaylists()
+    const storedPlaylists = sessionStorage.getItem('userPlaylists');
+    if (storedPlaylists && typeof storedPlaylists === 'string') {
+      return Promise.resolve( JSON.parse(sessionStorage.getItem('userPlaylists')));
+    } else {
+      return this.fetchUserPlaylists()
       .then((response) => {
         const filteredPlaylists = response.data;
+        sessionStorage.setItem('userPlaylists', JSON.stringify(filteredPlaylists));
         return filteredPlaylists;
       })
-      .catch((err) => console.log);
+      .catch(console.log);
+    }
   }
 
   // API REQUESTS
@@ -73,7 +80,13 @@ export class SpotifyService {
     });
   }
   public refactorPlaylist(id, body) {
-    return API.post(APIURLS.playlistRefactor.replace(':id', id), body);
+    return API.post(APIURLS.playlistRefactor.replace(':id', id), body).then(response => {
+      sessionStorage.removeItem('userPlaylists');
+      this.getUserPlaylists().then(playlists => {
+        this.userPlaylists.next(playlists);
+        return;
+      });
+    });
   }
   private setAuthRedirect() {
     const options = {

@@ -17,7 +17,9 @@ export class SearchTableComponent implements OnInit {
   // LIFE CYCLE HOOKS
   constructor(private spotifyService: SpotifyService) {}
   ngOnInit() {
-    this.buildTable();
+    this.spotifyService.userPlaylists.subscribe((playlists) => {
+      this.buildTable(playlists);
+    });
   }
   // PUBLIC METHODS
   public select(row) {
@@ -25,10 +27,9 @@ export class SearchTableComponent implements OnInit {
     if (row.selected) {
       this.selected.push(row);
     } else {
-      this.selected = this.selected.filter(item => item.id !== row.id);
+      this.selected = this.selected.filter((item) => item.id !== row.id);
     }
     this.spotifyService.selectedPlaylists.next(this.selected);
-    sessionStorage.setItem('selectedPlaylists', JSON.stringify(this.selected));
   }
   public getTracksClass(tracks) {
     return tracks < 10
@@ -49,15 +50,8 @@ export class SearchTableComponent implements OnInit {
     }
   }
   // PRIVATE METHODS
-  private async buildTable() {
-    let playlists;
-    if (Boolean(sessionStorage.getItem('userPlaylists'))) {
-      playlists = JSON.parse(sessionStorage.getItem('userPlaylists'));
-    } else {
-      playlists = await this.spotifyService.getUserPlaylists();
-      sessionStorage.setItem('userPlaylists', JSON.stringify(playlists));
-    }
-    const deselectedPlaylists = playlists.map(playlist => {
+  private async buildTable(playlists) {
+    const deselectedPlaylists = playlists.map((playlist) => {
       playlist.selected = false;
       return playlist;
     });

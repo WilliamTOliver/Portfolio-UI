@@ -26,7 +26,12 @@ export class DashboardComponent implements OnInit {
     } else {
       this.spotifyService
         .getUserInfo()
-        .then(userInfo => this.spotifyService.setUser(userInfo.data))
+        .then(userInfo => {
+          this.spotifyService.setUser(userInfo.data);
+          this.spotifyService.getUserPlaylists().then(playlists => {
+            this.spotifyService.userPlaylists.next(playlists);
+          });
+        })
         .catch(console.log);
     }
     this.spotifyService.tracks.subscribe(this.onTracksChange.bind(this));
