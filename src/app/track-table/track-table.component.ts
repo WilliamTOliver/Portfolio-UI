@@ -20,12 +20,17 @@ export class TrackTableComponent implements OnInit {
   displayedColumns: string[] = ['name', 'album', 'artist'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  filterValue = '';
   constructor(private spotifyService: SpotifyService) {}
 
   ngOnInit() {
     this.trackData = new MatTableDataSource(this.data.tracks);
     this.trackData.paginator = this.paginator;
     this.trackData.sort = this.sort;
+    this.spotifyService.globalFilter.subscribe(filterVal => {
+      this.applyFilter(filterVal);
+      this.filterValue = filterVal;
+    });
   }
   select(row) {}
   applyFilter(filterValue: string) {

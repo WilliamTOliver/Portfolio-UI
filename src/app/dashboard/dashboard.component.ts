@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit {
   get spotifyAuthorized(): boolean {
     return Boolean(sessionStorage.getItem('spotifyAuth'));
   }
+  // LIFE CYCLE HOOKS
   constructor(private route: ActivatedRoute, private router: Router, private spotifyService: SpotifyService) {}
   ngOnInit() {
     const params: any = this.route.queryParams;
@@ -20,12 +21,17 @@ export class DashboardComponent implements OnInit {
     }
     this.spotifyService.tracks.subscribe(this.onTracksChange.bind(this));
   }
+  // PUBLIC
   public navigate(page) {
     this.router.navigate([`dashboard/${page}`]);
   }
   public spotifyLogin() {
     this.spotifyService.requestAuth();
   }
+  public applyFilter(filterValue) {
+    this.spotifyService.globalFilter.next(filterValue);
+  }
+  // PRIVATE
   private onSpotifyTokenSuccess(response) {
     sessionStorage.setItem('spotifyAuth', JSON.stringify(response.data));
     this.spotifyService

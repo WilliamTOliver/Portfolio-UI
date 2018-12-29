@@ -1,16 +1,22 @@
 <div class="dashboard">
   <div class="row" *ngIf="spotifyAuthorized">
     <div class="col-4 playlists"><app-search-table></app-search-table></div>
-    <div class="col-8 tracks">
+    <div class="col-7 tracks">
+      <div>
+        <mat-form-field>
+          <input
+            matInput
+            (keyup)="applyFilter($event.target.value)"
+            placeholder="Filter Selected Playlists"
+          />
+        </mat-form-field>
+      </div>
       <div *ngFor="let playlist of selectedPlaylistsWithTracks">
         <div class="tracks-table">
           <app-track-table type="playlist" [data]="playlist"></app-track-table>
         </div>
       </div>
     </div>
-
-    <!-- <app-footer class="d-block d-sm-none"></app-footer>
-    <app-footer class="d-none d-sm-block"></app-footer> -->
   </div>
   <div *ngIf="!spotifyAuthorized">
     <h1>Playlist Manager</h1>

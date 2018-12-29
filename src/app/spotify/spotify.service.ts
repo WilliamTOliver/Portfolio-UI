@@ -13,6 +13,7 @@ export class SpotifyService {
   public userPlaylists = new BehaviorSubject<any>([]);
   public selectedPlaylists = new BehaviorSubject<any>([]);
   public tracks = new BehaviorSubject<any>([]);
+  public globalFilter = new BehaviorSubject<any>('');
 
   // Private Properties
   private cachedSelectedPlaylistIds: string[] = [];
