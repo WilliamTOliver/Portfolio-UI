@@ -2,7 +2,6 @@
 
 <mat-menu #options="matMenu">
   <button mat-menu-item [matMenuTriggerFor]="refactor">Refactor</button>
-  <button mat-menu-item>Taste Profile</button>
   <button mat-menu-item (click)="duplicateSelectedPlaylist()">Duplicate</button>
   <button mat-menu-item (click)="unfollowSelectedPlaylist()" class="delete">Delete</button>
 </mat-menu>
@@ -11,7 +10,6 @@
   <button mat-menu-item [matMenuTriggerFor]="splitby">Split-By</button>
   <button mat-menu-item [matMenuTriggerFor]="reorderby">Reorder-By</button>
   <button mat-menu-item  (click)="refactorPlaylist('', 'simple')">Simple Split</button>
-  <button mat-menu-item  (click)="refactorPlaylist('', 'smart')">Smart Refactor</button>
 </mat-menu>
 
 <mat-menu #splitby="matMenu">
