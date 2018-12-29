@@ -44,10 +44,6 @@ import {
 } from '@angular/material';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ChartComponent } from './chart/chart.component';
-import { ChartService } from './chart/chart.service';
-import { NgxEchartsModule } from 'ngx-echarts';
-import { ChartsAccordionComponent } from './charts-accordion/charts-accordion.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -77,8 +73,6 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     DashboardComponent,
-    ChartComponent,
-    ChartsAccordionComponent,
     LoginComponent,
     HeaderComponent,
     FooterComponent,
@@ -96,7 +90,6 @@ const appRoutes: Routes = [
       appRoutes,
       { enableTracing: false } // <-- debugging purposes only
     ),
-    NgxEchartsModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -134,7 +127,7 @@ const appRoutes: Routes = [
     MatTreeModule
   ],
   entryComponents: [ConfirmationDialogComponent, CreatePlaylistDialogComponent],
-  providers: [ChartService, AuthService, SpotifyService],
+  providers: [AuthService, SpotifyService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
