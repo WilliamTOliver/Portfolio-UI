@@ -16,6 +16,11 @@
                   delete_forever
                 </mat-icon>
               </button>
+              <button *ngIf="unfollowed.length > 0" mat-icon-button (click)="undoUnfollowMulti()">
+                <mat-icon>
+                  undo
+                </mat-icon>
+              </button>
         </div>
         <div>
           <table mat-table [dataSource]="searchData" matSort class="mat-elevation-z8">

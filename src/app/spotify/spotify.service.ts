@@ -12,6 +12,7 @@ export class SpotifyService {
   // Public Properties
   public userPlaylists = new BehaviorSubject<any>([]);
   public selectedPlaylists = new BehaviorSubject<any>([]);
+  public unfollowedPlaylists = new BehaviorSubject<any>([]);
   public tracks = new BehaviorSubject<any>([]);
   public globalFilter = new BehaviorSubject<any>('');
 
@@ -91,6 +92,13 @@ export class SpotifyService {
   }
   public unfollowPlaylists(ids) {
     API.post(APIURLS.playlistUnfollowMulti, {ids}).then((response) => {
+      this.unfollowedPlaylists.next(ids);
+      this.refreshPlaylistData();
+    });
+  }
+  public followPlaylists(ids) {
+    API.post(APIURLS.playlistFollowMulti, {ids}).then((response) => {
+      this.unfollowedPlaylists.next([]);
       this.refreshPlaylistData();
     });
   }

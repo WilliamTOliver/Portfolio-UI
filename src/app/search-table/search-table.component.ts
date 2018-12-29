@@ -15,6 +15,7 @@ export class SearchTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   selected: any[] = [];
+  unfollowed: string[] = [];
   // LIFE CYCLE HOOKS
   constructor(private spotifyService: SpotifyService, public dialog: MatDialog) {}
   ngOnInit() {
@@ -25,6 +26,7 @@ export class SearchTableComponent implements OnInit {
       this.spotifyService.userPlaylists.next(playlists);
     });
     this.spotifyService.selectedPlaylists.subscribe(playlists => this.selected = playlists);
+    this.spotifyService.unfollowedPlaylists.subscribe(playlistIds => this.unfollowed = playlistIds)
   }
   // PUBLIC METHODS
   public select(row) {
@@ -68,6 +70,9 @@ export class SearchTableComponent implements OnInit {
         this.spotifyService.unfollowPlaylists(playlistIds);
       }
     });
+  }
+  public undoUnfollowMulti() {
+    this.spotifyService.followPlaylists(this.spotifyService.unfollowedPlaylists.getValue());
   }
   // PRIVATE METHODS
   private async buildTable(playlists) {
