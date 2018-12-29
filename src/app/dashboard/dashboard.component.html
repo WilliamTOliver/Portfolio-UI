@@ -2,7 +2,7 @@
   <div class="row" *ngIf="spotifyAuthorized">
     <div class="col-4 playlists"><app-search-table></app-search-table></div>
     <div class="col-7 tracks">
-      <div>
+      <div *ngIf="selectedPlaylistsWithTracks.length > 0" class="filter-input">
         <mat-form-field>
           <input
             matInput
@@ -10,6 +10,11 @@
             placeholder="Filter Selected Playlists"
           />
         </mat-form-field>
+        <button *ngIf="selectedPlaylistsWithTracks.length > 0" mat-icon-button (click)="unfollowSelectedPlaylists()">
+          <mat-icon>
+            playlist_add
+          </mat-icon>
+        </button>
       </div>
       <div *ngFor="let playlist of selectedPlaylistsWithTracks">
         <div class="tracks-table">

@@ -8,4 +8,5 @@ export enum APIURLS {
   playlist = 'spotify/playlist/:id',
   playlistTracks = 'spotify/playlist/:id/tracks',
   playlistRefactor = 'spotify/playlist/:id/refactor',
+  playlistUnfollowMulti = 'spotify/playlist/unfollow-multi'
 }

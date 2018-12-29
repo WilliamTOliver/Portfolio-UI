@@ -60,6 +60,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
 import { SpotifyService } from './spotify/spotify.service';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 const appRoutes: Routes = [
   {
@@ -92,7 +93,8 @@ const appRoutes: Routes = [
     SearchTableComponent,
     SettingsComponent,
     UsersComponent,
-    ReportsComponent
+    ReportsComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -140,6 +142,7 @@ const appRoutes: Routes = [
     MatTooltipModule,
     MatTreeModule
   ],
+  entryComponents: [ConfirmationDialogComponent],
   providers: [ChartService, AuthService, SpotifyService],
   bootstrap: [AppComponent]
 })

@@ -89,6 +89,11 @@ export class SpotifyService {
       this.refreshPlaylistData();
     });
   }
+  public unfollowPlaylists(ids) {
+    API.post(APIURLS.playlistUnfollowMulti, {ids}).then((response) => {
+      this.refreshPlaylistData();
+    });
+  }
   private setAuthRedirect() {
     const options = {
       response_type: 'code',

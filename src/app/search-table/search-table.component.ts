@@ -1,5 +1,6 @@
+import { ConfirmationDialogComponent } from './../confirmation-dialog/confirmation-dialog.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatSort, MatTableDataSource, MatPaginator, MatDialog } from '@angular/material';
 import { SpotifyService } from '../spotify/spotify.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class SearchTableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   selected: any[] = [];
   // LIFE CYCLE HOOKS
-  constructor(private spotifyService: SpotifyService) {}
+  constructor(private spotifyService: SpotifyService, public dialog: MatDialog) {}
   ngOnInit() {
     this.spotifyService.userPlaylists.subscribe((playlists) => {
       this.buildTable(playlists);
@@ -52,6 +53,21 @@ export class SearchTableComponent implements OnInit {
     if (this.searchData.paginator) {
       this.searchData.paginator.firstPage();
     }
+  }
+  public unfollowSelectedPlaylists() {
+    const playlistIds = this.selected.map(playlist => playlist.id);
+    const playlistNames = this.selected.map(playlist => playlist.name).join(', ');
+    const message = `Playlists: \n${playlistNames} will be removed from your Spotify Library.`;
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '450px',
+      data: {message}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.spotifyService.unfollowPlaylists(playlistIds);
+      }
+    });
   }
   // PRIVATE METHODS
   private async buildTable(playlists) {

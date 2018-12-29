@@ -3,13 +3,20 @@
   <div class="row d-none d-sm-block">
     <div>
       <div ngClass="search-table-group">
-        <mat-form-field>
-          <input
-            matInput
-            (keyup)="applyFilter($event.target.value)"
-            placeholder="Filter Playlists"
-          />
-        </mat-form-field>
+        <div class="filter-input">
+            <mat-form-field>
+                <input
+                  matInput
+                  (keyup)="applyFilter($event.target.value)"
+                  placeholder="Filter Playlists"
+                />
+              </mat-form-field>
+              <button *ngIf="selected.length > 0" mat-icon-button (click)="unfollowSelectedPlaylists()">
+                <mat-icon>
+                  delete_forever
+                </mat-icon>
+              </button>
+        </div>
         <div>
           <table mat-table [dataSource]="searchData" matSort class="mat-elevation-z8">
             <!-- COLUMN DEFINITIONS -->
