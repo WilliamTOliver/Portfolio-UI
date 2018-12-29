@@ -61,6 +61,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
 import { SpotifyService } from './spotify/spotify.service';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { CreatePlaylistDialogComponent } from './create-playlist-dialog/create-playlist-dialog.component';
 
 const appRoutes: Routes = [
   {
@@ -94,7 +95,8 @@ const appRoutes: Routes = [
     SettingsComponent,
     UsersComponent,
     ReportsComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    CreatePlaylistDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -142,7 +144,7 @@ const appRoutes: Routes = [
     MatTooltipModule,
     MatTreeModule
   ],
-  entryComponents: [ConfirmationDialogComponent],
+  entryComponents: [ConfirmationDialogComponent, CreatePlaylistDialogComponent],
   providers: [ChartService, AuthService, SpotifyService],
   bootstrap: [AppComponent]
 })

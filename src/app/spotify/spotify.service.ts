@@ -15,12 +15,11 @@ export class SpotifyService {
   public unfollowedPlaylists = new BehaviorSubject<any>([]);
   public tracks = new BehaviorSubject<any>([]);
   public globalFilter = new BehaviorSubject<any>('');
-
+  public filteredTracks = new BehaviorSubject<any>({});
   // Private Properties
   private cachedSelectedPlaylistIds: string[] = [];
   private authorizationRedirect: string;
   private redirectUrl = 'http://localhost:4200/dashboard';
-  // Refactor into Observable/Behavior Subject?
   public get spotifyAuth() {
     return JSON.parse(sessionStorage.getItem('spotifyAuth'));
   }
@@ -76,30 +75,37 @@ export class SpotifyService {
     });
   }
   public refactorPlaylist(id, body) {
-    API.post(APIURLS.playlistRefactor.replace(':id', id), body).then((response) => {
+    return API.post(APIURLS.playlistRefactor.replace(':id', id), body).then((response) => {
       this.refreshPlaylistData();
     });
   }
   public createPlaylist(tracks, name) {
-    API.post(APIURLS.playlist.replace('/:id', ''), {tracks, name}).then((response) => {
+    return API.post(APIURLS.playlist.replace('/:id', ''), {tracks, name}).then((response) => {
       this.refreshPlaylistData();
     });
   }
   public unfollowPlaylist(id) {
-    API.delete(APIURLS.playlist.replace(':id', id)).then((response) => {
+    return API.delete(APIURLS.playlist.replace(':id', id)).then((response) => {
       this.refreshPlaylistData();
     });
   }
   public unfollowPlaylists(ids) {
-    API.post(APIURLS.playlistUnfollowMulti, {ids}).then((response) => {
+    return API.post(APIURLS.playlistUnfollowMulti, {ids}).then((response) => {
       this.unfollowedPlaylists.next(ids);
       this.refreshPlaylistData();
     });
   }
   public followPlaylists(ids) {
-    API.post(APIURLS.playlistFollowMulti, {ids}).then((response) => {
+    return API.post(APIURLS.playlistFollowMulti, {ids}).then((response) => {
       this.unfollowedPlaylists.next([]);
       this.refreshPlaylistData();
+    });
+  }
+  public refreshPlaylistData() {
+    sessionStorage.removeItem('userPlaylists');
+    this.getUserPlaylists().then((playlists) => {
+      this.userPlaylists.next(playlists);
+      this.selectedPlaylists.next([]);
     });
   }
   private setAuthRedirect() {
@@ -168,12 +174,5 @@ export class SpotifyService {
         this.tracks.next(Object.assign(currentTracks, newTracks));
       });
     }
-  }
-  private refreshPlaylistData() {
-    sessionStorage.removeItem('userPlaylists');
-    this.getUserPlaylists().then((playlists) => {
-      this.userPlaylists.next(playlists);
-      this.selectedPlaylists.next([]);
-    });
   }
 }

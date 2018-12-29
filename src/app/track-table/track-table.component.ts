@@ -35,7 +35,9 @@ export class TrackTableComponent implements OnInit {
   select(row) {}
   applyFilter(filterValue: string) {
     this.trackData.filter = filterValue.trim().toLowerCase();
-
+    const allFilteredValues = this.spotifyService.filteredTracks.getValue();
+    allFilteredValues[this.data.id] = this.trackData.filteredData;
+    this.spotifyService.filteredTracks.next(allFilteredValues);
     if (this.trackData.paginator) {
       this.trackData.paginator.firstPage();
     }

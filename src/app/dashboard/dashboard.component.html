@@ -10,7 +10,7 @@
             placeholder="Filter Selected Playlists"
           />
         </mat-form-field>
-        <button *ngIf="selectedPlaylistsWithTracks.length > 0" mat-icon-button (click)="unfollowSelectedPlaylists()">
+        <button *ngIf="selectedPlaylistsWithTracks.length > 0" mat-icon-button (click)="createPlaylist()">
           <mat-icon>
             playlist_add
           </mat-icon>
@@ -20,6 +20,11 @@
         <div class="tracks-table">
           <app-track-table type="playlist" [data]="playlist"></app-track-table>
         </div>
+      </div>
+      <div class="no-playlists-selected" *ngIf="selectedPlaylistsWithTracks.length <= 0">
+        <p>
+          Please Select the Playlist(s) You Want to Refactor
+        </p>
       </div>
     </div>
   </div>

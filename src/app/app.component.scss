@@ -4,9 +4,9 @@
 app-header {
     top: 0;
 }
-app-footer:not .mr-footer {
+app-footer {
     position: absolute;
-    bottom: .5rem;
+    bottom: 0;
     width: 100%;
 }
 td.mat-cell {

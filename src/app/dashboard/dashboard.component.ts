@@ -1,6 +1,8 @@
+import { MatDialog } from '@angular/material';
 import { SpotifyService } from './../spotify/spotify.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { CreatePlaylistDialogComponent } from '../create-playlist-dialog/create-playlist-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +15,7 @@ export class DashboardComponent implements OnInit {
     return Boolean(sessionStorage.getItem('spotifyAuth'));
   }
   // LIFE CYCLE HOOKS
-  constructor(private route: ActivatedRoute, private router: Router, private spotifyService: SpotifyService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private spotifyService: SpotifyService, public dialog: MatDialog) {}
   ngOnInit() {
     const params: any = this.route.queryParams;
     if (params && params.value && params.value.code) {
@@ -30,6 +32,22 @@ export class DashboardComponent implements OnInit {
   }
   public applyFilter(filterValue) {
     this.spotifyService.globalFilter.next(filterValue);
+  }
+  public createPlaylist() {
+    const dialogRef = this.dialog.open(CreatePlaylistDialogComponent, {
+      width: '450px'
+    });
+    dialogRef.afterClosed().subscribe(playlistName => {
+      if (playlistName) {
+        const filteredVals = this.spotifyService.filteredTracks.getValue();
+        const playlistIds = Object.keys(filteredVals);
+        const tracksArrays = playlistIds.map(playlistId => filteredVals[playlistId]);
+        const mergedTracks = [].concat.apply([], tracksArrays);
+        this.spotifyService.createPlaylist(mergedTracks.map(track => track.uri), playlistName).then(response => {
+          this.spotifyService.globalFilter.next('');
+        });
+      }
+    });
   }
   // PRIVATE
   private onSpotifyTokenSuccess(response) {

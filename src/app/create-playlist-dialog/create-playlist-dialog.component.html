@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Create Playlist</h1>
+<div mat-dialog-content>
+  <p>Please enter a name for the new playlist.</p>
+  <mat-form-field>
+      <input matInput placeholder="Playlist Name" [(ngModel)]="playlistName">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button [disabled]="playlistName.length < 1" mat-button [mat-dialog-close]="playlistName" cdkFocusInitial>Confirm</button>
+</div>
