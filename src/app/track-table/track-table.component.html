@@ -64,7 +64,7 @@
             placeholder="Filter Tracks"
           />
         </mat-form-field>
-        <div class="mat-elevation-z9">
+        <div ngClass="track-table-group" class="mat-elevation-z9">
           <table mat-table [dataSource]="trackData" matSort>
             <!-- COLUMN DEFINITIONS -->
             <!-- Name Column -->
@@ -91,6 +91,8 @@
               [class]="row.selected ? 'selected' : 'unselected'"
             ></tr>
           </table>
+          <mat-paginator pageSize="25" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
         </div>
       </div>
       <div [ngClass]="hasTracks ? 'hide' : ''">

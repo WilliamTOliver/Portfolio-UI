@@ -2,7 +2,7 @@
   <!-- DESKTOP -->
   <div class="row d-none d-sm-block">
     <div>
-      <div class="search-table-group">
+      <div ngClass="search-table-group">
         <mat-form-field>
           <input
             matInput
@@ -27,6 +27,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="select(row)" [class]="!!row.selected ? 'selected' : 'unselected'"></tr>
           </table>
+          <mat-paginator pageSize="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
         </div>
       </div>
     </div>

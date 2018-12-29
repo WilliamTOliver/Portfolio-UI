@@ -3,6 +3,10 @@
 }
 .search-table-group {
   width: 100%;
+  min-width: 25rem;
+  table {
+    min-width: 25rem;
+  }
 }
 .tracks-blue {
   color: #4576b6;
