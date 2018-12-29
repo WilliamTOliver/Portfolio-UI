@@ -16,10 +16,11 @@
                   delete_forever
                 </mat-icon>
               </button>
-              <button *ngIf="unfollowed.length > 0" mat-icon-button (click)="undoUnfollowMulti()">
+              <button *ngIf="unfollowed.length > 0" mat-button (click)="undoUnfollowMulti()">
                 <mat-icon>
                   undo
                 </mat-icon>
+                Undo
               </button>
         </div>
         <div>

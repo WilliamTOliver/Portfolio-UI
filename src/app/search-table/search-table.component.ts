@@ -26,7 +26,7 @@ export class SearchTableComponent implements OnInit {
       this.spotifyService.userPlaylists.next(playlists);
     });
     this.spotifyService.selectedPlaylists.subscribe(playlists => this.selected = playlists);
-    this.spotifyService.unfollowedPlaylists.subscribe(playlistIds => this.unfollowed = playlistIds)
+    this.spotifyService.unfollowedPlaylists.subscribe(playlistIds => this.unfollowed = playlistIds);
   }
   // PUBLIC METHODS
   public select(row) {

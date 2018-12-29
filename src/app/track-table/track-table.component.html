@@ -42,14 +42,9 @@
       <div class="col-3"><img [src]="data.image" /></div>
       <div class="col-9">
         <div class="row">
-          <p class="col-11 playlist-name">
+          <p class="col-12 playlist-name">
             <strong>{{ data.name }}</strong>
           </p>
-          <button class="col-1" mat-icon-button (click)="deselect()">
-            <mat-icon>
-              remove
-            </mat-icon>
-          </button>
         </div>
         <div>
           <button mat-stroked-button [matMenuTriggerFor]="options">
