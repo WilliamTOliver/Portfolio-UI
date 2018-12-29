@@ -34,9 +34,6 @@ export class DashboardComponent implements OnInit {
       this.spotifyService.setUser(userInfo.data);
     })
     .catch(console.log);
-    this.spotifyService.getUserPlaylists().then((playlists) => {
-      this.spotifyService.userPlaylists.next(playlists);
-    });
     this.router.navigate(['/dashboard']);
   }
   private onTracksChange(tracks) {

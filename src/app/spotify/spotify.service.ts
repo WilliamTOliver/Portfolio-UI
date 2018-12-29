@@ -36,7 +36,7 @@ export class SpotifyService {
   }
   public getUserPlaylists(): Promise<any> {
     const storedPlaylists = sessionStorage.getItem('userPlaylists');
-    if (storedPlaylists && typeof storedPlaylists === 'string') {
+    if (storedPlaylists && storedPlaylists.length && storedPlaylists.length > 0) {
       return Promise.resolve(JSON.parse(sessionStorage.getItem('userPlaylists')));
     } else {
       return this.fetchUserPlaylists()
@@ -75,10 +75,17 @@ export class SpotifyService {
   }
   public refactorPlaylist(id, body) {
     API.post(APIURLS.playlistRefactor.replace(':id', id), body).then((response) => {
-      sessionStorage.removeItem('userPlaylists');
-      this.getUserPlaylists().then((playlists) => {
-        this.userPlaylists.next(playlists);
-      });
+      this.refreshPlaylistData();
+    });
+  }
+  public createPlaylist(tracks, name) {
+    API.post(APIURLS.playlist.replace('/:id', ''), {tracks, name}).then((response) => {
+      this.refreshPlaylistData();
+    });
+  }
+  public unfollowPlaylist(id) {
+    API.delete(APIURLS.playlist.replace(':id', id)).then((response) => {
+      this.refreshPlaylistData();
     });
   }
   private setAuthRedirect() {
@@ -147,5 +154,12 @@ export class SpotifyService {
         this.tracks.next(Object.assign(currentTracks, newTracks));
       });
     }
+  }
+  private refreshPlaylistData() {
+    sessionStorage.removeItem('userPlaylists');
+    this.getUserPlaylists().then((playlists) => {
+      this.userPlaylists.next(playlists);
+      this.selectedPlaylists.next([]);
+    });
   }
 }

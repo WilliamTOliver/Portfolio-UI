@@ -28,7 +28,6 @@ export class TrackTableComponent implements OnInit {
     this.trackData.sort = this.sort;
   }
   select(row) {}
-  getTracksClass(tracks) {}
   applyFilter(filterValue: string) {
     this.trackData.filter = filterValue.trim().toLowerCase();
 
@@ -37,6 +36,14 @@ export class TrackTableComponent implements OnInit {
     }
   }
   refactorPlaylist(method, by) {
-    this.spotifyService.refactorPlaylist(this.data.id, {method, by, playlistName: this.data.name});
+    this.spotifyService.refactorPlaylist(this.data.id, { method, by, playlistName: this.data.name });
+  }
+  duplicateSelectedPlaylist() {
+    const tracks = this.data.tracks.map((track) => track.uri);
+    const name = this.data.name + '- Copy';
+    this.spotifyService.createPlaylist(tracks, name);
+  }
+  unfollowSelectedPlaylist() {
+    this.spotifyService.unfollowPlaylist(this.data.id);
   }
 }

@@ -20,6 +20,10 @@ export class SearchTableComponent implements OnInit {
     this.spotifyService.userPlaylists.subscribe((playlists) => {
       this.buildTable(playlists);
     });
+    this.spotifyService.getUserPlaylists().then((playlists) => {
+      this.spotifyService.userPlaylists.next(playlists);
+    });
+    this.spotifyService.selectedPlaylists.subscribe(playlists => this.selected = playlists);
   }
   // PUBLIC METHODS
   public select(row) {

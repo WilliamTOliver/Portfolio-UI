@@ -25,7 +25,7 @@
             </ng-container>
             <!-- ROW/COL INSTANTIATION ~ Columns must be defined and referenced in intended order in displayedColumns-->
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="select(row)" [class]="row.selected ? 'selected' : 'unselected'"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="select(row)" [class]="!!row.selected ? 'selected' : 'unselected'"></tr>
           </table>
         </div>
       </div>

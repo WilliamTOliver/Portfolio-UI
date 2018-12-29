@@ -3,8 +3,8 @@
 <mat-menu #options="matMenu">
   <button mat-menu-item [matMenuTriggerFor]="refactor">Refactor</button>
   <button mat-menu-item>Taste Profile</button>
-  <button mat-menu-item>Duplicate</button>
-  <button mat-menu-item class="delete">Delete</button>
+  <button mat-menu-item (click)="duplicateSelectedPlaylist()">Duplicate</button>
+  <button mat-menu-item (click)="unfollowSelectedPlaylist()" class="delete">Delete</button>
 </mat-menu>
 
 <mat-menu #refactor="matMenu">
@@ -16,10 +16,11 @@
 
 <mat-menu #splitby="matMenu">
   <button mat-menu-item (click)="refactorPlaylist('split', 'year')">Year</button>
-  <button mat-menu-item (click)="refactorPlaylist('split', 'artist')">Artist</button>
   <button mat-menu-item (click)="refactorPlaylist('split', 'popularity')">Popularity</button>
-  <button mat-menu-item (click)="refactorPlaylist('split', 'mood')">Mood</button>
+  <button mat-menu-item (click)="refactorPlaylist('split', 'key')">Key</button>
   <button mat-menu-item (click)="refactorPlaylist('split', 'time_signature')">Time Signature</button>
+  <button mat-menu-item (click)="refactorPlaylist('split', 'danceability')">Danceability</button>
+  <button mat-menu-item (click)="refactorPlaylist('split', 'mood')">Mood</button>
   <button mat-menu-item (click)="refactorPlaylist('split', 'tempo')">Speed</button>
   <button mat-menu-item (click)="refactorPlaylist('split', 'energy')">Energy</button>
   <button mat-menu-item (click)="refactorPlaylist('split', 'acousticness')">Acoustic</button>
@@ -27,10 +28,11 @@
 </mat-menu>
 <mat-menu #reorderby="matMenu">
   <button mat-menu-item (click)="refactorPlaylist('reorder', 'year')">Year</button>
-  <button mat-menu-item (click)="refactorPlaylist('reorder', 'artist')">Artist</button>
   <button mat-menu-item (click)="refactorPlaylist('reorder', 'popularity')">Popularity</button>
-  <button mat-menu-item (click)="refactorPlaylist('reorder', 'mood')">Mood</button>
+  <button mat-menu-item (click)="refactorPlaylist('reorder', 'key')">Key</button>
   <button mat-menu-item (click)="refactorPlaylist('reorder', 'time_signature')">Time Signature</button>
+  <button mat-menu-item (click)="refactorPlaylist('reorder', 'danceability')">Danceability</button>
+  <button mat-menu-item (click)="refactorPlaylist('reorder', 'mood')">Mood</button>
   <button mat-menu-item (click)="refactorPlaylist('reorder', 'speed')">Speed</button>
   <button mat-menu-item (click)="refactorPlaylist('reorder', 'energy')">Energy</button>
   <button mat-menu-item (click)="refactorPlaylist('reorder', 'acousticness')">Acoustic</button>
