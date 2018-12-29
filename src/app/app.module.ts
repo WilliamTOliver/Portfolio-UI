@@ -54,9 +54,6 @@ import { FooterComponent } from './footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TrackTableComponent } from './track-table/track-table.component';
 import { SearchTableComponent } from './search-table/search-table.component';
-import { SettingsComponent } from './settings/settings.component';
-import { UsersComponent } from './users/users.component';
-import { ReportsComponent } from './reports/reports.component';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
 import { SpotifyService } from './spotify/spotify.service';
@@ -70,11 +67,6 @@ const appRoutes: Routes = [
     canActivateChild: [AuthGuard],
     children: [
       { path: '', component: DashboardComponent },
-      { path: 'reports', component: ReportsComponent },
-      { path: 'users', component: UsersComponent },
-      { path: 'settings', component: SettingsComponent },
-      { path: 'search-table', component: SearchTableComponent },
-      { path: 'track-table', component: TrackTableComponent }
     ]
   },
   { path: 'login', component: LoginComponent },
@@ -92,9 +84,6 @@ const appRoutes: Routes = [
     FooterComponent,
     TrackTableComponent,
     SearchTableComponent,
-    SettingsComponent,
-    UsersComponent,
-    ReportsComponent,
     ConfirmationDialogComponent,
     CreatePlaylistDialogComponent
   ],
