@@ -1,6 +1,7 @@
 {
-  "name": "wto-portfolio-ui",
-  "version": "0.1.0",
+  "name": "sjb-2-ui",
+  "description": "An angular UI for refactoring a spotify playlist library",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,6 +9,10 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WilliamTOliver/SJB-2-UI"
   },
   "private": true,
   "dependencies": {
