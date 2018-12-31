@@ -9,7 +9,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --prod"
   },
   "repository": {
     "type": "git",
@@ -63,6 +64,5 @@
   "engines": {
     "node": "8.10.0",
     "npm": "6.5.0"
-  },
-  "heroku-postinstall": "ng build --prod"
+  }
 }

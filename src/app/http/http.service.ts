@@ -1,7 +1,6 @@
-import { environment } from '../../environments/environment';
 import axios, { AxiosInstance } from 'axios';
 const api: AxiosInstance = axios.create({
-  baseURL: environment.apiUrl,
+  baseURL: 'https://sjb-2-api.herokuapp.com/',
   timeout: 10000
 });
 api.interceptors.request.use(
