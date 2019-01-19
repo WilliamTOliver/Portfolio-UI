@@ -24,11 +24,21 @@
           [formControl]="passwordFormControl"
           type="password"
         >
-        <mat-error *ngIf="emailFormControl.hasError('required')">
+        <mat-error *ngIf="passwordFormControl.hasError('required')">
           Password is <strong>required</strong>
         </mat-error>
       </mat-form-field>
     </div>
-    <button mat-raised-button type="submit" [disabled]="emailFormControl.invalid || passwordFormControl.invalid"> Submit </button>
+    <mat-error *ngIf="invalidLogin">
+      Invalid credentials
+    </mat-error>
+    <button class="login-submit" mat-raised-button type="submit" [disabled]="emailFormControl.invalid || passwordFormControl.invalid">
+      <span *ngIf="loggingIn" >
+        <mat-progress-bar color="accent" mode="indeterminate"></mat-progress-bar>
+      </span>
+      <span *ngIf="!loggingIn" >
+          Submit
+      </span>
+    </button>
   </form>
 </mat-card>

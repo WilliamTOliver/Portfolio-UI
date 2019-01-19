@@ -1,7 +1,7 @@
 {
   "name": "sjb-2-ui",
   "description": "An angular UI for refactoring a spotify playlist library",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "ng": "ng",
     "start": "node server",

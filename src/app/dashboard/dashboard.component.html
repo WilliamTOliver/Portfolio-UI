@@ -1,43 +1,23 @@
-<div class="dashboard">
-  <div class="row" *ngIf="spotifyAuthorized">
-    <div class="col-4 playlists"><app-search-table></app-search-table></div>
-    <div class="col-7 tracks">
-      <div *ngIf="selectedPlaylistsWithTracks.length > 0" class="filter-input">
-        <mat-form-field>
-          <input
-            matInput
-            (keyup)="applyFilter($event.target.value)"
-            placeholder="Filter Selected Playlists"
-          />
-        </mat-form-field>
-        <button *ngIf="selectedPlaylistsWithTracks.length > 0" mat-icon-button (click)="createPlaylist()">
-          <mat-icon>
-            playlist_add
-          </mat-icon>
-        </button>
-      </div>
-      <div *ngFor="let playlist of selectedPlaylistsWithTracks">
-        <div class="tracks-table">
-          <app-track-table type="playlist" [data]="playlist"></app-track-table>
-        </div>
-      </div>
-      <div class="no-playlists-selected" *ngIf="selectedPlaylistsWithTracks.length <= 0">
-        <p>
-          Please Select the Playlist(s) You Want to Refactor
-        </p>
-      </div>
-    </div>
-  </div>
-  <div *ngIf="!spotifyAuthorized">
-    <h1>Playlist Manager</h1>
-    <p>
-      This application, with your authorization, uses your spotify data to show
-      unique insights about your music preferences.
-    </p>
-    <p>To proceed, please first login with spotify:</p>
-    <button class="spotify-login" mat-raised-button (click)="spotifyLogin()">
-      <img src="./../../assets/Spotify_Icon_CMYK_White.png" alt="" />
-      <span><p>Login with Spotify</p></span>
+<div>
+  <h1>Playlist Manager</h1>
+  <p>
+    This application, with your authorization, uses your spotify data to show
+    unique insights about your music preferences.
+  </p>
+  <p>To proceed, please first login with spotify:</p>
+  <div class="row">
+    <button class="spotify-login col-3" mat-raised-button (click)="spotifyLogin()" [disabled]="loggingIn">
+      <span *ngIf="!loggingIn">
+        <img src="./../../assets/Spotify_Icon_CMYK_White.png" alt="" />
+        <span><p>Login with Spotify</p></span>
+      </span>
+      <span *ngIf="loggingIn">
+        <mat-progress-bar
+          mode="indeterminate"
+          color="accent"
+        >
+      </mat-progress-bar>
+      </span>
     </button>
   </div>
 </div>

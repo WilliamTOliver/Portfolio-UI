@@ -1,11 +1,8 @@
-.dashboard {
-  margin-top: 3rem;
-  width: 100%;
-}
 button.spotify-login {
   margin: 1rem;
   text-align: left;
   background-color: black;
+  min-height: 3rem;
   img {
     max-width: 3rem;
     padding: .5rem;
@@ -16,21 +13,4 @@ button.spotify-login {
     display: inline-block;
   }
 }
-.tracks {
-  padding: 0;
-  margin-left: 2rem;
-}
-.tracks-table {
-  margin-bottom: .5rem;
-}
-.playlists {
-  padding: 0;
-}
-.tracks {
-  padding: 0;
-}
-.no-playlists-selected {
-  position: absolute;
-  top: 10rem;
-  left: 5rem;
-}
+
