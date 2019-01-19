@@ -8,16 +8,19 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  public loggingIn = false;
   // LIFE CYCLE HOOKS
   constructor(private route: ActivatedRoute, private router: Router, private spotifyService: SpotifyService) {}
   ngOnInit() {
     const params: any = this.route.queryParams;
     if (params && params.value && params.value.code) {
+      this.loggingIn = true;
       this.spotifyService.requestToken(params.value.code).then(this.onSpotifyTokenSuccess.bind(this));
     }
   }
   // PUBLIC
   public spotifyLogin() {
+    this.loggingIn = true;
     this.spotifyService.requestAuth();
   }
   // PRIVATE

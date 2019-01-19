@@ -5,8 +5,19 @@
     unique insights about your music preferences.
   </p>
   <p>To proceed, please first login with spotify:</p>
-  <button class="spotify-login" mat-raised-button (click)="spotifyLogin()">
-    <img src="./../../assets/Spotify_Icon_CMYK_White.png" alt="" />
-    <span><p>Login with Spotify</p></span>
-  </button>
+  <div class="row">
+    <button class="spotify-login col-3" mat-raised-button (click)="spotifyLogin()" [disabled]="loggingIn">
+      <span *ngIf="!loggingIn">
+        <img src="./../../assets/Spotify_Icon_CMYK_White.png" alt="" />
+        <span><p>Login with Spotify</p></span>
+      </span>
+      <span *ngIf="loggingIn">
+        <mat-progress-bar
+          mode="indeterminate"
+          color="accent"
+        >
+      </mat-progress-bar>
+      </span>
+    </button>
+  </div>
 </div>
