@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="!loggingOut" >
   <form (ngSubmit)="submitLogin($event)" class="login-form">
     <div>
       <mat-form-field>

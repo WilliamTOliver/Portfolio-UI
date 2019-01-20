@@ -1,7 +1,7 @@
 export enum APIURLS {
   login = '/auth/login/',
   signup = '/auth/signup/',
-  checkAuth = '/auth',
+  auth = '/auth',
   spotifyToken = 'spotify/token',
   spotifyUser = 'spotify/user',
   userPlaylists = 'spotify/user/playlists',

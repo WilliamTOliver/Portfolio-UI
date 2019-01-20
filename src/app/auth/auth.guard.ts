@@ -17,6 +17,9 @@ export class AuthGuard implements CanActivateChild, CanActivate {
     return this.authService
       .checkAuth()
       .then(auth => {
+        if (auth.data.userDetails) {
+        sessionStorage.setItem('userDetails', JSON.stringify(auth.data.userDetails));
+        }
         return true;
       })
       .catch(err => {

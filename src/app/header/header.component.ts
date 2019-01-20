@@ -6,5 +6,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  public pages = [
+    {
+      icon: 'home',
+      route: ['dashboard'],
+    },
+    {
+      icon: 'settings',
+      route: ['dashboard/admin'],
+    },
+    {
+      icon: 'exit_to_app',
+      route: ['login'],
+    },
+  ];
   constructor() {}
 }
