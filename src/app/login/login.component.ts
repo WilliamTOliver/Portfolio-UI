@@ -22,12 +22,10 @@ export class LoginComponent implements OnInit{
   matcher = new LoginErrorStateMatcher();
   invalidLogin = false;
   loggingIn = false;
-  loggingOut = false;
   constructor(private authService: AuthService, private router: Router) {}
   ngOnInit(): void {
-    if (this.authService.userDetails) {
-      this.loggingOut = true;
-      this.authService.logout().then(response => this.loggingOut = false);
+    if (this.authService.isLoggedIn) {
+      this.authService.logout();
     }
   }
   async submitLogin(event) {
@@ -37,7 +35,7 @@ export class LoginComponent implements OnInit{
         email: this.emailFormControl.value,
         password: this.passwordFormControl.value
       });
-      sessionStorage.setItem('authorization', auth.data.token);
+      this.authService.setAuth(auth.data.token);
       this.router.navigate(['/dashboard']);
     } catch (error) {
       this.loggingIn = false;

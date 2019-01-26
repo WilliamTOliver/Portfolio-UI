@@ -1,3 +1,4 @@
+import { AuthService } from './../auth/auth.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -20,5 +21,8 @@ export class HeaderComponent {
       route: ['login'],
     },
   ];
-  constructor() {}
+  public get isLoggedIn() {
+    return this.authService.isLoggedIn;
+  }
+  constructor(private authService: AuthService) {}
 }

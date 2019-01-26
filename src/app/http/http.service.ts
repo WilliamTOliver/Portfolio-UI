@@ -1,10 +1,10 @@
 import axios, { AxiosInstance } from 'axios';
 import { environment } from 'src/environments/environment';
-const api: AxiosInstance = axios.create({
+export const API: AxiosInstance = axios.create({
   baseURL: environment.apiBaseURL,
   timeout: 10000
 });
-api.interceptors.request.use(
+API.interceptors.request.use(
   (config) => {
     // Apply Auth Tokens To All Requests ~ API decides which to consume and which not to consume
     // This keeps UI handling dumb to what endpoints are or aren't secure
@@ -15,7 +15,7 @@ api.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 );
-api.interceptors.response.use(
+API.interceptors.response.use(
   (config) => {
     if (config.status === 401 || config.status === 403) {
       sessionStorage.clear();
@@ -23,7 +23,6 @@ api.interceptors.response.use(
     return config;
   }
 );
-export const API = api;
 export const spotifyAPI: AxiosInstance = axios.create({
   baseURL: 'https://api.spotify.com/v1',
   timeout: 10000

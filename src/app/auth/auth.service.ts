@@ -12,15 +12,20 @@ export class AuthService {
   get userDetails() {
     return JSON.parse(sessionStorage.getItem('userDetails'));
   }
+  get isLoggedIn() {
+    return Boolean(this.token);
+  }
   constructor() {}
+  setAuth(token) {
+    sessionStorage.setItem('authorization', token);
+  }
   login(credentials) {
     return API.post(APIURLS.login, credentials);
   }
   logout() {
-    const promise = API.delete(`${APIURLS.auth}/${this.userDetails.userId}`);
     sessionStorage.removeItem('authorization');
     sessionStorage.removeItem('userDetails');
-    return promise;
+    return;
   }
   checkAuth() {
     return API.get(APIURLS.auth);

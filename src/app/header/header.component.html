@@ -1,4 +1,4 @@
-<mat-toolbar class="row">
+<mat-toolbar *ngIf="isLoggedIn"  class="row">
   <span class="col-3">SJB Project Sandbox</span>
   <span class="spacer"></span>
   <span *ngFor="let page of pages">
