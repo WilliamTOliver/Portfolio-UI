@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material';
 import { AuthService } from '../auth/auth.service';
@@ -16,13 +16,18 @@ export class LoginErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   passwordFormControl = new FormControl('', [Validators.required]);
   matcher = new LoginErrorStateMatcher();
   invalidLogin = false;
   loggingIn = false;
   constructor(private authService: AuthService, private router: Router) {}
+  ngOnInit(): void {
+    if (this.authService.isLoggedIn) {
+      this.authService.logout();
+    }
+  }
   async submitLogin(event) {
     this.loggingIn = true;
     try {
@@ -30,7 +35,7 @@ export class LoginComponent {
         email: this.emailFormControl.value,
         password: this.passwordFormControl.value
       });
-      sessionStorage.setItem('authorization', auth.data.token);
+      this.authService.setAuth(auth.data.token);
       this.router.navigate(['/dashboard']);
     } catch (error) {
       this.loggingIn = false;

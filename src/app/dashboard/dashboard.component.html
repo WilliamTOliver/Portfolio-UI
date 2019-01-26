@@ -1,10 +1,14 @@
 <div>
-  <h1>Playlist Manager</h1>
   <p>
-    This application, with your authorization, uses your spotify data to show
-    unique insights about your music preferences.
+    This is a hobby project of mine focused on exploring ideas related to:
+    <ul>
+      <li>Creating a platform for on-going small, personal project development</li>
+      <li>Bringing closure to unresolved interests in playing with spotify's track audio_features</li>
+      <li>Personal Experiments With CI/CD</li>
+    </ul>
+  <p>
+   <i> Use of this application's primary feature, a playlist management tool, requires additional external authentication through spotify.</i>
   </p>
-  <p>To proceed, please first login with spotify:</p>
   <div class="row">
     <button class="spotify-login col-3" mat-raised-button (click)="spotifyLogin()" [disabled]="loggingIn">
       <span *ngIf="!loggingIn">

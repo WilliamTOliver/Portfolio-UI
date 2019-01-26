@@ -1,5 +1,10 @@
-<!-- <mat-toolbar>
-  <mat-toolbar-row>
-    <p>William Trevor Oliver</p>
-  </mat-toolbar-row>
-</mat-toolbar> -->
+<mat-toolbar *ngIf="isLoggedIn"  class="row">
+  <span class="col-3">SJB Project Sandbox</span>
+  <span class="spacer"></span>
+  <a *ngIf="!isHome" [routerLink]="['dashboard']">
+    <mat-icon>home</mat-icon>
+  </a>
+  <a [routerLink]="['login']">
+    <mat-icon>exit_to_app</mat-icon>
+  </a>
+</mat-toolbar>
