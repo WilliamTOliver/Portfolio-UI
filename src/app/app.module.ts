@@ -56,7 +56,6 @@ import { SpotifyService } from './spotify/spotify.service';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { CreatePlaylistDialogComponent } from './create-playlist-dialog/create-playlist-dialog.component';
 import { PlaylistManagerComponent } from './playlist-manager/playlist-manager.component';
-import { AdminComponent } from './admin/admin.component';
 import { AddUserDialogComponent } from './add-user-dialog/add-user-dialog.component';
 
 const appRoutes: Routes = [
@@ -67,7 +66,6 @@ const appRoutes: Routes = [
     children: [
       { path: '', component: DashboardComponent },
       { path: 'playlist-manager', component: PlaylistManagerComponent },
-      { path: 'admin', component: AdminComponent },
     ]
   },
   { path: 'login', component: LoginComponent },
@@ -86,7 +84,6 @@ const appRoutes: Routes = [
     ConfirmationDialogComponent,
     CreatePlaylistDialogComponent,
     PlaylistManagerComponent,
-    AdminComponent,
     AddUserDialogComponent
   ],
   imports: [

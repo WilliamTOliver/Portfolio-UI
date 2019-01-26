@@ -1,9 +1,10 @@
 <mat-toolbar *ngIf="isLoggedIn"  class="row">
   <span class="col-3">SJB Project Sandbox</span>
   <span class="spacer"></span>
-  <span *ngFor="let page of pages">
-    <a [routerLink]="page.route">
-      <mat-icon>{{page.icon}}</mat-icon>
-    </a>
-  </span>
+  <a *ngIf="!isHome" [routerLink]="['dashboard']">
+    <mat-icon>home</mat-icon>
+  </a>
+  <a [routerLink]="['login']">
+    <mat-icon>exit_to_app</mat-icon>
+  </a>
 </mat-toolbar>
